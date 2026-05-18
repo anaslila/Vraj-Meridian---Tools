@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vraj Meridian - Client Tool</title>
+    <link rel="icon" type="image/png" href="https://framerusercontent.com/images/FxGHGJ6619N3lNK2FRX1mjq8kA.png?width=1185&height=535">
+    
+    <!-- Premium Google Font: Jost -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Jost', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f4f6f9;
+            color: #2d3748;
+            line-height: 1.5;
+            letter-spacing: 0.02em;
+        }
+        
+        /* HEADER INTEGRATION */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 10px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            gap: 15px;
+        }
+        .branding {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+        .logo-container img {
+            height: 38px;
+            width: auto;
+            display: block;
+        }
+        .version-tag {
+            background-color: #e0e6ed;
+            color: #4a5568;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* COMPACT NAVIGATION */
+        .header-nav {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .tab-radio {
+            position: absolute;
+            opacity: 0;
+            width: 0; height: 0;
+        }
+        .tab-label {
+            background: #ffffff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 6px 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+        .tab-label img {
+            width: 26px;
+            height: 26px;
+            object-fit: contain;
+        }
+        .tab-label h3 {
+            color: #4a5568;
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .tab-label:hover {
+            border-color: #cbd5e0;
+            background-color: #f7fafc;
+        }
+        
+        /* Pressed Active State Depth Effect */
+        .tab-radio:checked + .tab-label {
+            background: #edf2f7;
+            border-color: #3182ce;
+            transform: translateY(1px);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.08);
+        }
+        .tab-radio:checked + .tab-label h3 {
+            color: #2b6cb0;
+        }
+
+        /* Content Container */
+        .container {
+            max-width: 1100px;
+            margin: 25px auto;
+            padding: 0 15px;
+        }
+        
+        /* Interface Modules Router Switch */
+        .tool-section {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            margin-bottom: 30px;
+            display: none;
+        }
+        
+        .section-title {
+            font-size: 1.35rem;
+            color: #2d3748;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #edf2f7;
+            padding-bottom: 10px;
+            font-weight: 600;
+        }
+        .section-title img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        /* Two-column layout alignment grid */
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #4a5568;
+            font-size: 0.9rem;
+        }
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .input-prefix {
+            position: absolute;
+            left: 12px;
+            color: #a0aec0;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .input-wrapper input {
+            width: 100%;
+            padding: 10px 12px 10px 32px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: border-color 0.15s;
+            color: #2d3748;
+        }
+        .input-wrapper input:focus {
+            outline: none;
+            border-color: #3182ce;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+        }
+        
+        /* Modern output presentation elements */
+        .results-panel {
+            background: #f7fafc;
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid #3182ce;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 15px;
+        }
+        .results-panel.eligibility-panel { border-left-color: #38a169; }
+        .results-panel.price-panel { border-left-color: #805ad5; }
+        
+        .result-item {
+            border-bottom: 1px dashed #e2e8f0;
+            padding-bottom: 10px;
+        }
+        .result-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .result-label {
+            font-size: 0.8rem;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+            font-weight: 600;
+        }
+        .result-value {
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: #2d3748;
+        }
+        .result-value.highlight { color: #3182ce; }
+        .result-value.success { color: #38a169; }
+        
+        /* Price sheet custom split layout */
+        .price-split-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            background: #fff;
+        }
+        .breakdown-box {
+            background-color: #f8fafc;
+            border: 1px dashed #cbd5e0;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        .breakdown-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            padding: 8px 0;
+            border-bottom: 1px solid #edf2f7;
+        }
+        .breakdown-row:last-child { border-bottom: none; }
+        .breakdown-row span:last-child { font-weight: 600; color: #2d3748;}
+
+        .note-box {
+            margin-top: 15px;
+            background-color: #fffff0;
+            border: 1px solid #fefcbf;
+            color: #744210;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+        }
+
+        /* MOBILE OPTIMIZATIONS */
+        @media (max-width: 868px) {
+            header {
+                flex-direction: column;
+                padding: 12px;
+                gap: 12px;
+            }
+            .header-nav {
+                width: 100%;
+                justify-content: space-between;
+                gap: 6px;
+            }
+            .tab-label {
+                flex: 1;
+                padding: 8px 4px;
+                flex-direction: column;
+                gap: 4px;
+                border-radius: 8px;
+            }
+            .tab-label h3 {
+                font-size: 0.72rem;
+            }
+            .tab-label img {
+                width: 22px;
+                height: 22px;
+            }
+            .calculator-grid, .price-split-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="branding">
+            <div class="logo-container">
+                <img src="https://framerusercontent.com/images/FxGHGJ6619N3lNK2FRX1mjq8kA.png?width=1185&height=535" alt="Vraj Meridian Logo">
+            </div>
+            <div class="version-tag">Version 1.22</div>
+        </div>
+        
+        <!-- Navigation Component -->
+        <nav class="header-nav">
+            <input type="radio" id="radio-emi" name="tool-tabs" class="tab-radio" checked>
+            <label for="radio-emi" class="tab-label" onclick="showSection('emi-calc')">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/018/972/682/small/calculator-3d-application-icon-png.png" alt="">
+                <h3>EMI Calc</h3>
+            </label>
+            
+            <input type="radio" id="radio-eligibility" name="tool-tabs" class="tab-radio">
+            <label for="radio-eligibility" class="tab-label" onclick="showSection('eligibility-calc')">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/036/585/013/small/a-3d-bank-and-hand-on-a-transparent-background-free-png.png" alt="">
+                <h3>Eligibility</h3>
+            </label>
+            
+            <input type="radio" id="radio-price" name="tool-tabs" class="tab-radio">
+            <label for="radio-price" class="tab-label" onclick="showSection('price-sheet')">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/028/727/063/small/price-tag-sale-label-png.png" alt="">
+                <h3>Price Sheet</h3>
+            </label>
+        </nav>
+    </header>
+
+    <div class="container">
+
+        <!-- 1) EMI CALCULATOR SECTION -->
+        <section id="emi-calc" class="tool-section" style="display: block;">
+            <div class="section-title">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/018/972/682/small/calculator-3d-application-icon-png.png" alt="">
+                <h2>EMI Calculator</h2>
+            </div>
+            <div class="calculator-grid">
+                <div class="calculator-inputs">
+                    <div class="input-group">
+                        <label for="emi-amount">Loan Amount</label>
+                        <div class="input-wrapper">
+                            <span class="input-prefix">₹</span>
+                            <input type="text" id="emi-amount" placeholder="Enter loan amount" oninput="handleCurrencyInput(this, calculateEMI)">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="emi-interest">Interest Rate (p.a.)</label>
+                        <div class="input-wrapper">
+                            <span class="input-prefix">%</span>
+                            <input type="number" step="0.05" id="emi-interest" placeholder="Enter interest rate" oninput="calculateEMI()">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="emi-tenure">Tenure (Years)</label>
+                        <div class="input-wrapper">
+                            <span class="input-prefix">Yr</span>
+                            <input type="number" id="emi-tenure" placeholder="Enter tenure in years" oninput="calculateEMI()">
+                        </div>
+                    </div>
+                </div>
+                <div class="results-panel">
+                    <div class="result-item">
+                        <div class="result-label">Monthly EMI Installment</div>
+                        <div class="result-value highlight" id="render-emi">₹ 0</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Total Interest Payable</div>
+                        <div class="result-value" id="render-total-interest">₹ 0</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Total Amount (Principal + Interest)</div>
+                        <div class="result-value" id="render-total-amount">₹ 0</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2) LOAN ELIGIBILITY SECTION -->
+        <section id="eligibility-calc" class="tool-section">
+            <div class="section-title">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/036/585/013/small/a-3d-bank-and-hand-on-a-transparent-background-free-png.png" alt="">
+                <h2>Loan Eligibility Calculator</h2>
+            </div>
+            <div class="calculator-grid">
+                <div class="calculator-inputs">
+                    <div class="input-group">
+                        <label for="el-salary">Gross Monthly Income / Salary</label>
+                        <div class="input-wrapper">
+                            <span class="input-prefix">₹</span>
+                            <input type="text" id="el-salary" placeholder="Enter gross monthly salary" oninput="handleCurrencyInput(this, calculateEligibility)">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="el-age">Age of Applicant</label>
+                        <div class="input-wrapper">
+                            <span class="input-prefix">Yo</span>
+                            <input type="number" id="el-age" placeholder="Enter applicant age" min="18" max="70" oninput="calculateEligibility()">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="el-obligations">Existing Monthly EMI Obligations</label>
+                        <div class="input-wrapper">
+                            <span class="input-prefix">₹</span>
+                            <input type="text" id="el-obligations" placeholder="Enter current EMIs if any" oninput="handleCurrencyInput(this, calculateEligibility)">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="el-interest">Expected Interest Rate (p.a.)</label>
+                        <div class="input-wrapper">
+                            <span class="input-prefix">%</span>
+                            <input type="number" step="0.05" id="el-interest" placeholder="Enter expected interest rate" oninput="calculateEligibility()">
+                        </div>
+                    </div>
+                </div>
+                <div class="results-panel eligibility-panel">
+                    <div class="result-item">
+                        <div class="result-label">Maximum Tenure Allowed</div>
+                        <div class="result-value" id="render-el-tenure">0 Years</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Available FOIR Factors</div>
+                        <div class="result-value" id="render-el-foir">0%</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Max Affordable Monthly EMI Capability</div>
+                        <div class="result-value" id="render-el-emi">₹ 0</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Eligible Loan Amount Estimate</div>
+                        <div class="result-value success" id="render-el-loan">₹ 0</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3) TWO-WAY DYNAMIC PRICE SHEET SECTION -->
+        <section id="price-sheet" class="tool-section">
+            <div class="section-title">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/028/727/063/small/price-tag-sale-label-png.png" alt="">
+                <h2>Bilateral Price Matrix Calculator</h2>
+            </div>
+            
+            <div class="price-split-grid">
+                <div class="calculator-inputs">
+                    <div class="input-group">
+                        <label for="ps-carpet">Carpet Area</label>
+                        <div class="input-wrapper">
+                            <span class="input-prefix">Sq</span>
+                            <input type="number" id="ps-carpet" placeholder="Enter carpet area (sqft)" oninput="runPriceEngine('forward')">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="ps-rate">Per Sq. Ft. Price</label>
+                        <div class="input-wrapper">
+                            <span class="input-prefix">₹</span>
+                            <input type="text" id="ps-rate" placeholder="Enter rate per sqft" oninput="handleCurrencyInput(this, function(){ runPriceEngine('forward'); })">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="ps-agreement">Agreement Value</label>
+                        <div class="input-wrapper">
+                            <span class="input-prefix">₹</span>
+                            <input type="text" id="ps-agreement" placeholder="Enter agreement value" oninput="handleCurrencyInput(this, function(){ runPriceEngine('agreement-change'); })">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Car Parking Allowance</label>
+                        <div class="input-wrapper">
+                            <span class="input-prefix">₹</span>
+                            <input type="text" id="ps-parking" value="10,00,000" oninput="handleCurrencyInput(this, function(){ runPriceEngine('forward'); })">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Results & All-Inclusive Inputs Panel -->
+                <div class="results-panel price-panel">
+                    <div class="input-group" style="margin-bottom:5px;">
+                        <label for="ps-allin" style="color:#805ad5; font-weight:700;">ALL-INCLUSIVE ESTIMATED PRICE</label>
+                        <div class="input-wrapper">
+                            <span class="input-prefix" style="color:#805ad5">₹</span>
+                            <input type="text" id="ps-allin" placeholder="Enter targeted all-in price" style="border-color:#b469ff; font-weight:700; color:#805ad5; font-size:1.1rem" oninput="handleCurrencyInput(this, function(){ runPriceEngine('backward'); })">
+                        </div>
+                    </div>
+
+                    <!-- Clean Breakdowns Panel -->
+                    <div class="breakdown-box">
+                        <div class="breakdown-row">
+                            <span>Stamp Duty (6%):</span>
+                            <span id="lbl-stamp">₹ 0</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span>GST (5%):</span>
+                            <span id="lbl-gst">₹ 0</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span>Registration Charges:</span>
+                            <span>₹ 50,000</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span>Other Charges:</span>
+                            <span id="lbl-other">₹ 0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="note-box">
+                *Dynamic Reverse Logic Engine: Editing the <strong>All-Inclusive Price</strong> or <strong>Agreement Value</strong> backward-extracts your dynamic base rates, maintaining constants: Registration (₹50k) and Development Outflows. Car Parking can be edited dynamically as needed.
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Application Engine Logic Scripts -->
+    <script>
+        // Tab Display routing
+        function showSection(id) {
+            document.querySelectorAll('.tool-section').forEach(sec => sec.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+        }
+
+        // Clean currency values for calculation
+        function getPureNumber(val) {
+            let str = val.toString().replace(/,/g, '').trim();
+            return parseFloat(str) || 0;
+        }
+
+        // Indian Standard Currency formatting algorithm 
+        function formatIndianCurrency(num) {
+            if (isNaN(num) || num === null || num === 0) return "0";
+            let x = Math.round(num).toString();
+            let lastThree = x.substring(x.length - 3);
+            let otherBits = x.substring(0, x.length - 3);
+            if (otherBits !== '') {
+                lastThree = ',' + lastThree;
+            }
+            return otherBits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+        }
+
+        // Formatter hookup for live inputs
+        function handleCurrencyInput(inputElement, callback) {
+            let selectionStart = inputElement.selectionStart;
+            let oldLength = inputElement.value.length;
+            
+            let pureNum = inputElement.value.replace(/[^0-9]/g, '');
+            if (pureNum === "") {
+                inputElement.value = "";
+                if(callback) callback();
+                return;
+            }
+            
+            let formatted = formatIndianCurrency(parseInt(pureNum, 10));
+            inputElement.value = formatted;
+            
+            let newLength = formatted.length;
+            selectionStart = selectionStart + (newLength - oldLength);
+            inputElement.setSelectionRange(selectionStart, selectionStart);
+
+            if(callback) callback();
+        }
+
+        // 1) EMI Engine Calculations
+        function calculateEMI() {
+            let principal = getPureNumber(document.getElementById('emi-amount').value);
+            let interestRate = parseFloat(document.getElementById('emi-interest').value) || 0;
+            let tenureYears = parseFloat(document.getElementById('emi-tenure').value) || 0;
+
+            if (principal === 0 || tenureYears === 0) {
+                document.getElementById('render-emi').innerText = "₹ 0";
+                document.getElementById('render-total-interest').innerText = "₹ 0";
+                document.getElementById('render-total-amount').innerText = "₹ 0";
+                return;
+            }
+
+            let monthlyInterest = (interestRate / 100) / 12;
+            let numberOfPayments = tenureYears * 12;
+
+            let emi = 0;
+            if (interestRate > 0) {
+                emi = (principal * monthlyInterest * Math.pow(1 + monthlyInterest, numberOfPayments)) / 
+                      (Math.pow(1 + monthlyInterest, numberOfPayments) - 1);
+            } else {
+                emi = principal / numberOfPayments;
+            }
+
+            let totalAmount = emi * numberOfPayments;
+            let totalInterest = totalAmount - principal;
+
+            document.getElementById('render-emi').innerText = "₹ " + formatIndianCurrency(emi);
+            document.getElementById('render-total-interest').innerText = "₹ " + formatIndianCurrency(totalInterest > 0 ? totalInterest : 0);
+            document.getElementById('render-total-amount').innerText = "₹ " + formatIndianCurrency(totalAmount);
+        }
+
+        // 2) Loan Qualification Eligibility Engine
+        function calculateEligibility() {
+            let grossSalary = getPureNumber(document.getElementById('el-salary').value);
+            let age = parseInt(document.getElementById('el-age').value) || 0;
+            let obligations = getPureNumber(document.getElementById('el-obligations').value);
+            let expectedInterest = parseFloat(document.getElementById('el-interest').value) || 0;
+
+            if (grossSalary === 0 || age === 0) {
+                document.getElementById('render-el-tenure').innerText = "0 Years";
+                document.getElementById('render-el-foir').innerText = "0%";
+                document.getElementById('render-el-emi').innerText = "₹ 0";
+                document.getElementById('render-el-loan').innerText = "₹ 0";
+                return;
+            }
+
+            let maxTenureYears = 60 - age;
+            if (maxTenureYears > 30) maxTenureYears = 30; 
+            if (maxTenureYears < 0) maxTenureYears = 0;
+
+            let foir = 0.40;
+            if (grossSalary >= 50000 && grossSalary < 100000) {
+                foir = 0.50;
+            } else if (grossSalary >= 100000) {
+                foir = 0.60;
+            }
+
+            let totalAffordableEmiAmount = (grossSalary * foir) - obligations;
+            if (totalAffordableEmiAmount < 0) totalAffordableEmiAmount = 0;
+
+            let eligibleLoan = 0;
+            if (totalAffordableEmiAmount > 0 && expectedInterest > 0 && maxTenureYears > 0) {
+                let r = (expectedInterest / 100) / 12;
+                let n = maxTenureYears * 12;
+                eligibleLoan = totalAffordableEmiAmount * (Math.pow(1 + r, n) - 1) / (r * Math.pow(1 + r, n));
+            }
+
+            document.getElementById('render-el-tenure').innerText = maxTenureYears + " Years";
+            document.getElementById('render-el-foir').innerText = (foir * 100) + "%";
+            document.getElementById('render-el-emi').innerText = "₹ " + formatIndianCurrency(totalAffordableEmiAmount);
+            document.getElementById('render-el-loan').innerText = "₹ " + formatIndianCurrency(eligibleLoan);
+        }
+
+        // 3) Bilateral Pricing Engine (Forward & Backward Matrices)
+        function runPriceEngine(direction) {
+            let carpet = parseFloat(document.getElementById('ps-carpet').value) || 0;
+            let parking = getPureNumber(document.getElementById('ps-parking').value);
+            let registration = 50000;
+            let otherCharges = carpet * 1180; 
+
+            if (carpet === 0 && direction !== 'backward') {
+                document.getElementById('lbl-stamp').innerText = "₹ 0";
+                document.getElementById('lbl-gst').innerText = "₹ 0";
+                document.getElementById('lbl-other').innerText = "₹ 0";
+                return;
+            }
+
+            if (direction === 'forward') {
+                let rate = getPureNumber(document.getElementById('ps-rate').value);
+                let agreementValue = carpet * rate;
+                
+                document.getElementById('ps-agreement').value = agreementValue > 0 ? formatIndianCurrency(agreementValue) : "";
+                executeTaxAndAllInCalculations(agreementValue, otherCharges, registration, parking);
+            } 
+            else if (direction === 'agreement-change') {
+                let agreementValue = getPureNumber(document.getElementById('ps-agreement').value);
+                let rate = carpet > 0 ? (agreementValue / carpet) : 0;
+                
+                document.getElementById('ps-rate').value = rate > 0 ? formatIndianCurrency(rate) : "";
+                executeTaxAndAllInCalculations(agreementValue, otherCharges, registration, parking);
+            } 
+            else if (direction === 'backward') {
+                let targetAllIn = getPureNumber(document.getElementById('ps-allin').value);
+                if (targetAllIn === 0) {
+                    document.getElementById('ps-agreement').value = "";
+                    document.getElementById('ps-rate').value = "";
+                    document.getElementById('lbl-stamp').innerText = "₹ 0";
+                    document.getElementById('lbl-gst').innerText = "₹ 0";
+                    document.getElementById('lbl-other').innerText = "₹ 0";
+                    return;
+                }
+                
+                // Formula: AllIn = (1.11 * Agreement) + 50000 + OtherCharges + Parking
+                let netTaxablePool = targetAllIn - registration - otherCharges - parking;
+                let derivedAgreement = netTaxablePool > 0 ? (netTaxablePool / 1.11) : 0;
+                let derivedRate = (derivedAgreement > 0 && carpet > 0) ? (derivedAgreement / carpet) : 0;
+
+                document.getElementById('ps-agreement').value = derivedAgreement > 0 ? formatIndianCurrency(derivedAgreement) : "";
+                document.getElementById('ps-rate').value = derivedRate > 0 ? formatIndianCurrency(derivedRate) : "";
+
+                let stampDuty = derivedAgreement * 0.06;
+                let gst = derivedAgreement * 0.05;
+
+                document.getElementById('lbl-stamp').innerText = "₹ " + formatIndianCurrency(stampDuty);
+                document.getElementById('lbl-gst').innerText = "₹ " + formatIndianCurrency(gst);
+                document.getElementById('lbl-other').innerText = "₹ " + formatIndianCurrency(otherCharges);
+            }
+        }
+
+        function executeTaxAndAllInCalculations(agreement, other, reg, park) {
+            let stampDuty = agreement * 0.06;
+            let gst = agreement * 0.05;
+            let totalAllIn = agreement + stampDuty + gst + reg + other + park;
+
+            document.getElementById('lbl-stamp').innerText = "₹ " + formatIndianCurrency(stampDuty);
+            document.getElementById('lbl-gst').innerText = "₹ " + formatIndianCurrency(gst);
+            document.getElementById('lbl-other').innerText = "₹ " + formatIndianCurrency(other);
+            document.getElementById('ps-allin').value = totalAllIn > 0 ? formatIndianCurrency(totalAllIn) : "";
+        }
+    </script>
+</body>
+</html>
