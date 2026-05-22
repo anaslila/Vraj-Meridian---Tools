@@ -2,24 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Rigid Viewport Constraints to completely lock down zooming and maintain app-like behavior -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Real Estate Calculator</title>
     
-    <!-- PWA Web Capabilities Setup -->
     <meta name="theme-color" content="#92a3e1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="RE Calc">
     
-    <!-- Unified 3D High-Res Brand Imagery -->
     <link rel="icon" type="image/png" href="https://cdn3d.iconscout.com/3d/premium/thumb/house-with-financial-calculator-3d-icon-png-download-14089504.png">
     <link rel="apple-touch-icon" href="https://cdn3d.iconscout.com/3d/premium/thumb/house-with-financial-calculator-3d-icon-png-download-14089504.png">
     
-    <!-- Inline Manifest PWA Router -->
     <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlJlYWwgRXN0YXRlIENhbGN1bGF0b3IiLAogICJzaG9ydF9uYW1lIjogIlJFIENhbGMiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2Y0ZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiM5MmEzZTEiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJodHRwczovL2NkbjNkLmljb25zY291dC5jb20vM2QvcHJlbWl1bS90aHVtYi9ob3VzZS13aXRoLWZpbmFuY2lhbC1jYWxjdWxhdG9yLTNkLWljb24tcG5nLWRvd25sb2FkLTE0MDg5NTA0LnBuZyIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIiwKICAgICAgInB1cnBvc2UiOiAiYW55IG1hc2thYmxlIiwKICAgIH0KICBdCn0=">
 
-    <!-- Premium Google Font: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -60,6 +55,39 @@
             overflow-x: hidden;
             /* Hard stop on alternative multi-touch browser behaviors */
             touch-action: pan-x pan-y;
+        }
+
+        /* DYNAMIC SPLASH SCREEN OVERLAY STYLING */
+        #custom-splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999999;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            opacity: 1;
+            visibility: visible;
+        }
+        .splash-frame {
+            width: 414px;
+            height: 736px;
+            max-width: 100%;
+            max-height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .splash-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
         }
         
         /* HEADER INTEGRATION */
@@ -334,17 +362,21 @@
 </head>
 <body>
 
+    <div id="custom-splash-screen">
+        <div class="splash-frame">
+            <img src="https://i.postimg.cc/t45yHMVh/Real-Estate-Calculator.gif" alt="Real Estate App Initializing">
+        </div>
+    </div>
+
     <header>
         <div class="branding">
             <div class="logo-container">
-                <!-- Top Primary Branding Icon -->
                 <img src="https://cdn3d.iconscout.com/3d/premium/thumb/house-with-financial-calculator-3d-icon-png-download-14089504.png" alt="Real Estate Calculator Asset Logo">
             </div>
             <h1 class="app-name-title">Real Estate Calculator</h1>
-            <div class="version-tag">Version 1.51</div>
+            <div class="version-tag">Version 1.55</div>
         </div>
         
-        <!-- Navigation Component with Restored UI Assets -->
         <nav class="header-nav">
             <input type="radio" id="radio-emi" name="tool-tabs" class="tab-radio" checked>
             <label for="radio-emi" class="tab-label" onclick="showSection('emi-calc')">
@@ -368,7 +400,6 @@
 
     <div class="container">
 
-        <!-- 1) EMI CALCULATOR SECTION -->
         <section id="emi-calc" class="tool-section" style="display: block;">
             <div class="section-title">
                 <img src="https://static.vecteezy.com/system/resources/thumbnails/018/972/682/small/calculator-3d-application-icon-png.png" alt="">
@@ -415,7 +446,6 @@
             </div>
         </section>
 
-        <!-- 2) LOAN ELIGIBILITY SECTION -->
         <section id="eligibility-calc" class="tool-section">
             <div class="section-title">
                 <img src="https://static.vecteezy.com/system/resources/thumbnails/036/585/013/small/a-3d-bank-and-hand-on-a-transparent-background-free-png.png" alt="">
@@ -473,7 +503,6 @@
             </div>
         </section>
 
-        <!-- 3) TWO-WAY DYNAMIC PRICE SHEET SECTION -->
         <section id="price-sheet" class="tool-section">
             <div class="section-title">
                 <img src="https://static.vecteezy.com/system/resources/thumbnails/028/727/063/small/price-tag-sale-label-png.png" alt="">
@@ -512,7 +541,6 @@
                     </div>
                 </div>
                 
-                <!-- Results & All-Inclusive Inputs Panel -->
                 <div class="results-panel price-panel">
                     <div class="input-group" style="margin-bottom:5px;">
                         <label for="ps-allin" style="color:var(--text-main); font-weight:700;">ALL-INCLUSIVE ESTIMATED PRICE</label>
@@ -522,7 +550,6 @@
                         </div>
                     </div>
 
-                    <!-- Clean Breakdowns Panel -->
                     <div class="breakdown-box">
                         <div class="breakdown-row">
                             <span>Stamp Duty (6%):</span>
@@ -550,8 +577,27 @@
 
     </div>
 
-    <!-- Application Engine Logic Scripts -->
     <script>
+        // ENGINE ADDITION: TIMEOUT ROUTINE FOR SPLASH SCREEN TERMINATION
+        window.addEventListener('DOMContentLoaded', () => {
+            // Generate random duration exclusively between 1000ms (1s) and 2000ms (2s)
+            const randomSplashDuration = Math.floor(Math.random() * (2000 - 1000 + 1)) + 1000;
+            
+            setTimeout(() => {
+                const splash = document.getElementById('custom-splash-screen');
+                if (splash) {
+                    // Trigger fading transition animations
+                    splash.style.opacity = '0';
+                    splash.style.visibility = 'hidden';
+                    
+                    // Completely flush node from active DOM to maintain device system execution performance
+                    setTimeout(() => {
+                        splash.remove();
+                    }, 400);
+                }
+            }, randomSplashDuration);
+        });
+
         // App Zoom Control Lock: block wheel scaling and keyboard hotkeys (Ctrl + / Ctrl -)
         document.addEventListener('wheel', function(e) {
             if (e.ctrlKey) {
