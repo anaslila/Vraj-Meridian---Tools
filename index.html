@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="RE Calc">
     
-    <link rel="icon" type="image/png" href="https://cdn3d.iconscscout.com/3d/premium/thumb/house-with-financial-calculator-3d-icon-png-download-14089504.png">
+    <link rel="icon" type="image/png" href="https://cdn3d.iconscout.com/3d/premium/thumb/house-with-financial-calculator-3d-icon-png-download-14089504.png">
     <link rel="apple-touch-icon" href="https://cdn3d.iconscout.com/3d/premium/thumb/house-with-financial-calculator-3d-icon-png-download-14089504.png">
     
     <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlJlYWwgRXN0YXRlIENhbGN1bGF0b3IiLAogICJzaG9ydF9uYW1lIjogIlJFIENhbGMiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2Y0ZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiM5MmEzZTEiLAogICJuZXdfdmVyc2lvbiI6ICIxLjYiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJodHRwczovL2NkbjNkLmljb25zY291dC5jb20vM2QvcHJlbWl1bS90aHVtYi9ob3VzZS13aXRoLWZpbmFuY2lhbC1jYWxjdWxhdG9yLTNkLWljb24tcG5nLWRvd25sb2FkLTE0MDg5NTA0LnBuZyIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIiwKICAgICAgInB1cnBvc2UiOiAiYW55IG1hc2thYmxlIiwKICAgIH0KICBdCn0=">
@@ -121,7 +121,7 @@
             border: 1px solid rgba(146, 163, 225, 0.3);
         }
 
-        /* UNIFORM CONTROL RADIO NAVIGATION BUTTONS */
+        /* HORIZONTAL BUTTONS LAYOUT ENGINE (Button | Button | Button | Button) */
         .header-nav {
             display: flex;
             gap: 8px;
@@ -369,28 +369,39 @@
             font-size: 0.8rem;
         }
 
-        /* MOBILE ALIGNMENT FIX: STRICT ONE COLUMN LAYOUT FOR NAV BUTTONS */
+        /* MOBILE FIX: STRICT HORIZONTAL ROW (BUTTON | BUTTON | BUTTON | BUTTON) */
         @media (max-width: 868px) {
             header {
                 flex-direction: column;
-                padding: 12px;
-                gap: 12px;
+                padding: 10px;
+                gap: 10px;
+            }
+            .branding {
+                margin-bottom: 2px;
             }
             .header-nav {
                 width: 100%;
-                display: flex;
-                flex-direction: column; /* FORCES BUTTONS IN SINGLE COLUMN ONE-BY-ONE */
-                gap: 8px;
+                display: grid;
+                grid-template-columns: repeat(4, 1fr); /* STRIP MATRIX TO FORCED EQUAL 4 COLS */
+                gap: 4px; /* MINIFIED SPACING FOR MAXIMUM SCREEN RETENTION */
             }
             .tab-label {
                 width: 100%;
-                padding: 10px 15px;
-                flex-direction: row; /* KEEP ICON AND TEXT HORIZONTAL IN FULL WIDTH */
-                justify-content: flex-start;
-                gap: 12px;
-                border-radius: 10px;
+                padding: 6px 2px;
+                flex-direction: column; /* ICON UP, TEXT DOWN FOR COMPACT FIT */
+                justify-content: center;
+                align-items: center;
+                gap: 4px;
+                border-radius: 8px;
             }
-            .tab-label h3 { font-size: 0.88rem; }
+            .tab-label img {
+                width: 16px;
+                height: 16px;
+            }
+            .tab-label h3 { 
+                font-size: 0.65rem; /* MICRO TEXT FIT FOR ULTRA COMPACT ROW */
+                letter-spacing: -0.02em;
+            }
             .calculator-grid, .price-split-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
@@ -760,7 +771,6 @@
                 return;
             }
 
-            // Convert everything to a single base unit (Square Feet) first
             switch (originUnit) {
                 case 'sqft': baseSqft = currentVal; break;
                 case 'sqm': baseSqft = currentVal * 10.76391; break;
@@ -770,7 +780,6 @@
                 case 'hectares': baseSqft = currentVal * 107639.1; break;
             }
 
-            // Repopulate all alternative matrices from base Sqft
             if (originUnit !== 'sqft') fields.sqft.value = baseSqft.toFixed(2);
             if (originUnit !== 'sqm') fields.sqm.value = (baseSqft / 10.76391).toFixed(2);
             if (originUnit !== 'acres') fields.acres.value = (baseSqft / 43560).toFixed(4);
