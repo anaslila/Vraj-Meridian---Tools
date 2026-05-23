@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="RE Calc">
     
-    <link rel="icon" type="image/png" href="https://cdn3d.iconscout.com/3d/premium/thumb/house-with-financial-calculator-3d-icon-png-download-14089504.png">
+    <link rel="icon" type="image/png" href="https://cdn3d.iconscscout.com/3d/premium/thumb/house-with-financial-calculator-3d-icon-png-download-14089504.png">
     <link rel="apple-touch-icon" href="https://cdn3d.iconscout.com/3d/premium/thumb/house-with-financial-calculator-3d-icon-png-download-14089504.png">
     
     <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlJlYWwgRXN0YXRlIENhbGN1bGF0b3IiLAogICJzaG9ydF9uYW1lIjogIlJFIENhbGMiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2Y0ZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiM5MmEzZTEiLAogICJuZXdfdmVyc2lvbiI6ICIxLjYiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJodHRwczovL2NkbjNkLmljb25zY291dC5jb20vM2QvcHJlbWl1bS90aHVtYi9ob3VzZS13aXRoLWZpbmFuY2lhbC1jYWxjdWxhdG9yLTNkLWljb24tcG5nLWRvd25sb2FkLTE0MDg5NTA0LnBuZyIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIiwKICAgICAgInB1cnBvc2UiOiAiYW55IG1hc2thYmxlIiwKICAgIH0KICBdCn0=">
@@ -121,7 +121,7 @@
             border: 1px solid rgba(146, 163, 225, 0.3);
         }
 
-        /* UNIFORM COMPACT INTERFACE CONTROL RADIO NAVIGATION BUTTONS */
+        /* UNIFORM CONTROL RADIO NAVIGATION BUTTONS */
         .header-nav {
             display: flex;
             gap: 8px;
@@ -150,7 +150,7 @@
         }
         .tab-label.converter-label-img img {
             border-radius: 4px;
-            object-fit: cover;
+            object-fit: contain;
         }
         .tab-label h3 {
             color: var(--text-muted);
@@ -206,7 +206,7 @@
         }
         .section-title.converter-title-img img {
             border-radius: 4px;
-            object-fit: cover;
+            object-fit: contain;
         }
 
         .calculator-grid {
@@ -239,7 +239,7 @@
         }
         .input-wrapper input {
             width: 100%;
-            padding: 10px 12px 10px 32px;
+            padding: 10px 12px 10px 36px;
             border: 1.5px solid #e2e8f0;
             border-radius: 8px;
             font-size: 0.95rem;
@@ -369,6 +369,7 @@
             font-size: 0.8rem;
         }
 
+        /* MOBILE ALIGNMENT FIX: STRICT ONE COLUMN LAYOUT FOR NAV BUTTONS */
         @media (max-width: 868px) {
             header {
                 flex-direction: column;
@@ -377,19 +378,19 @@
             }
             .header-nav {
                 width: 100%;
-                justify-content: space-between;
-                gap: 6px;
-                display: grid;
-                grid-template-columns: 1fr 1fr;
+                display: flex;
+                flex-direction: column; /* FORCES BUTTONS IN SINGLE COLUMN ONE-BY-ONE */
+                gap: 8px;
             }
             .tab-label {
-                flex: 1;
-                padding: 8px 4px;
-                flex-direction: column;
-                gap: 4px;
-                border-radius: 8px;
+                width: 100%;
+                padding: 10px 15px;
+                flex-direction: row; /* KEEP ICON AND TEXT HORIZONTAL IN FULL WIDTH */
+                justify-content: flex-start;
+                gap: 12px;
+                border-radius: 10px;
             }
-            .tab-label h3 { font-size: 0.7rem; }
+            .tab-label h3 { font-size: 0.88rem; }
             .calculator-grid, .price-split-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
@@ -438,7 +439,7 @@
 
             <input type="radio" id="radio-converter" name="tool-tabs" class="tab-radio">
             <label for="radio-converter" class="tab-label converter-label-img" onclick="showSection('area-converter-sec')">
-                <img src="https://static.vecteezy.com/system/resources/thumbnails/053/798/863/small/try-square-line-filled-icon-vector.jpg" alt="Convert">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/068/083/907/small/yellow-tape-measure-icon-cartoon-style-illustration-isolated-on-a-transparent-background-png.png" alt="Convert">
                 <h3>Area Conv</h3>
             </label>
         </nav>
@@ -574,7 +575,7 @@
         <section id="price-sheet" class="tool-section">
             <div class="section-title">
                 <img src="https://static.vecteezy.com/system/resources/thumbnails/028/727/063/small/price-tag-sale-label-png.png" alt="">
-                <h2>Bilateral Price Matrix Calculator</h2>
+                <h2>Price Calculator</h2>
             </div>
             
             <div class="price-split-grid">
@@ -645,8 +646,8 @@
 
         <section id="area-converter-sec" class="tool-section">
             <div class="section-title converter-title-img">
-                <img src="https://static.vecteezy.com/system/resources/thumbnails/053/798/863/small/try-square-line-filled-icon-vector.jpg" alt="">
-                <h2>Bilateral Area Converter</h2>
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/068/083/907/small/yellow-tape-measure-icon-cartoon-style-illustration-isolated-on-a-transparent-background-png.png" alt="">
+                <h2>Area Converter</h2>
             </div>
             <div class="calculator-grid">
                 <div class="calculator-inputs">
@@ -654,32 +655,55 @@
                         <label>Square Feet (Sq. Ft.)</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">Ft²</span>
-                            <input type="number" id="conv-sqft" placeholder="Enter Square Feet value" oninput="convertAreaUnits('sqft')">
+                            <input type="number" id="conv-sqft" placeholder="Enter Square Feet" oninput="convertAreaUnits('sqft')">
                         </div>
                     </div>
                     <div class="input-group">
                         <label>Square Meters (Sq. M.)</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">M²</span>
-                            <input type="number" id="conv-sqm" placeholder="Enter Square Meters value" oninput="convertAreaUnits('sqm')">
+                            <input type="number" id="conv-sqm" placeholder="Enter Square Meters" oninput="convertAreaUnits('sqm')">
                         </div>
                     </div>
                     <div class="input-group">
                         <label>Acres</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">Ac</span>
-                            <input type="number" id="conv-acres" placeholder="Enter Acres value" oninput="convertAreaUnits('acres')">
+                            <input type="number" id="conv-acres" placeholder="Enter Acres" oninput="convertAreaUnits('acres')">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Guntas (Guntha)</label>
+                        <div class="input-wrapper">
+                            <span class="input-prefix">Gt</span>
+                            <input type="number" id="conv-guntas" placeholder="Enter Guntas" oninput="convertAreaUnits('guntas')">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Bighas (Standard)</label>
+                        <div class="input-wrapper">
+                            <span class="input-prefix">Bh</span>
+                            <input type="number" id="conv-bigha" placeholder="Enter Bighas" oninput="convertAreaUnits('bigha')">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Hectares</label>
+                        <div class="input-wrapper">
+                            <span class="input-prefix">Ha</span>
+                            <input type="number" id="conv-hectares" placeholder="Enter Hectares" oninput="convertAreaUnits('hectares')">
                         </div>
                     </div>
                 </div>
                 
                 <div class="results-panel converter-panel">
                     <div class="result-item">
-                        <div class="result-label">Standard Conversion Constants</div>
-                        <div style="font-size: 0.88rem; color: var(--text-main); margin-top: 5px; line-height: 1.6;">
-                            • 1 Square Meter = <strong>10.7639 Square Feet</strong><br>
-                            • 1 Acre = <strong>43,560 Square Feet</strong><br>
-                            • 1 Acre = <strong>4,046.85 Square Meters</strong>
+                        <div class="result-label">Standard Conversion Core Constants</div>
+                        <div style="font-size: 0.88rem; color: var(--text-main); margin-top: 5px; line-height: 1.7;">
+                            • 1 Square Meter = <strong>10.7639 Sq. Ft.</strong><br>
+                            • 1 Guntha = <strong>1,089 Sq. Ft.</strong> (40 Guntas = 1 Acre)<br>
+                            • 1 Acre = <strong>43,560 Sq. Ft.</strong><br>
+                            • 1 Bigha (Std) = <strong>27,000 Sq. Ft.</strong><br>
+                            • 1 Hectare = <strong>1,07,639 Sq. Ft.</strong> (2.471 Acres)
                         </div>
                     </div>
                 </div>
@@ -715,33 +739,44 @@
             document.getElementById(id).style.display = 'block';
         }
 
-        // BI-LATERAL REAL ESTATE AREA SYSTEM CONVERTER CORE
+        // FULLY INTEGRATED EXTENDED REAL ESTATE AREA CONVERTER CORE
         function convertAreaUnits(originUnit) {
-            const sqftInput = document.getElementById('conv-sqft');
-            const sqmInput = document.getElementById('conv-sqm');
-            const acresInput = document.getElementById('conv-acres');
+            const fields = {
+                sqft: document.getElementById('conv-sqft'),
+                sqm: document.getElementById('conv-sqm'),
+                acres: document.getElementById('conv-acres'),
+                guntas: document.getElementById('conv-guntas'),
+                bigha: document.getElementById('conv-bigha'),
+                hectares: document.getElementById('conv-hectares')
+            };
 
-            let sqftVal = parseFloat(sqftInput.value) || 0;
-            let sqmVal = parseFloat(sqmInput.value) || 0;
-            let acresVal = parseFloat(acresInput.value) || 0;
+            let baseSqft = 0;
+            let currentVal = parseFloat(fields[originUnit].value) || 0;
 
-            if (sqftVal === 0 && sqmVal === 0 && acresVal === 0) {
-                if(originUnit !== 'sqft') sqftInput.value = "";
-                if(originUnit !== 'sqm') sqmInput.value = "";
-                if(originUnit !== 'acres') acresInput.value = "";
+            if (currentVal === 0) {
+                for (let key in fields) {
+                    if (key !== originUnit) fields[key].value = "";
+                }
                 return;
             }
 
-            if (originUnit === 'sqft') {
-                sqmInput.value = (sqftVal / 10.76391).toFixed(2);
-                acresInput.value = (sqftVal / 43560).toFixed(4);
-            } else if (originUnit === 'sqm') {
-                sqftInput.value = (sqmVal * 10.76391).toFixed(2);
-                acresInput.value = (sqmVal / 4046.8564).toFixed(4);
-            } else if (originUnit === 'acres') {
-                sqftInput.value = (acresVal * 43560).toFixed(2);
-                sqmInput.value = (acresVal * 4046.8564).toFixed(2);
+            // Convert everything to a single base unit (Square Feet) first
+            switch (originUnit) {
+                case 'sqft': baseSqft = currentVal; break;
+                case 'sqm': baseSqft = currentVal * 10.76391; break;
+                case 'acres': baseSqft = currentVal * 43560; break;
+                case 'guntas': baseSqft = currentVal * 1089; break;
+                case 'bigha': baseSqft = currentVal * 27000; break;
+                case 'hectares': baseSqft = currentVal * 107639.1; break;
             }
+
+            // Repopulate all alternative matrices from base Sqft
+            if (originUnit !== 'sqft') fields.sqft.value = baseSqft.toFixed(2);
+            if (originUnit !== 'sqm') fields.sqm.value = (baseSqft / 10.76391).toFixed(2);
+            if (originUnit !== 'acres') fields.acres.value = (baseSqft / 43560).toFixed(4);
+            if (originUnit !== 'guntas') fields.guntas.value = (baseSqft / 1089).toFixed(2);
+            if (originUnit !== 'bigha') fields.bigha.value = (baseSqft / 27000).toFixed(3);
+            if (originUnit !== 'hectares') fields.hectares.value = (baseSqft / 107639.1).toFixed(4);
         }
 
         function getPureNumber(val) {
