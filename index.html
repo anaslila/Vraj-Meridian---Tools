@@ -13,7 +13,7 @@
     <link rel="icon" type="image/png" href="https://cdn3d.iconscout.com/3d/premium/thumb/house-with-financial-calculator-3d-icon-png-download-14089504.png">
     <link rel="apple-touch-icon" href="https://cdn3d.iconscout.com/3d/premium/thumb/house-with-financial-calculator-3d-icon-png-download-14089504.png">
     
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlJlYWwgRXN0YXRlIENhbGN1bGF0b3IiLAogICJzaG9ydF9uYW1lIjogIlJFIENhbGMiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2Y0ZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiM5MmEzZTEiLAogICJuZXdfdmVyc2lvbiI6ICIxLjYxIiwKICAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImh0dHBzOi8vY2RuM2QuaWNvbnNjb3V0LmNvbS8zZC9wcmVtaXVtL3RodW1iL2hvdXNlLXdpdGgtZmluYW5jaWFsLWNhbGN1bGF0b3ItM2QtaWNvbi1wbmctZG93bmxvYWQtMTQwODk1MDQucG5nIiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciLAogICAgICAicHVycG9zZSI6ICJhbnkgbWFza2FibGUiCiAgICB9CiAgXQp9">
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlJlYWwgRXN0YXRlIENhbGN1bGF0b3IiLAogICJzaG9ydF9uYW1lIjogIlJFIENhbGMiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2Y0ZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiM5MmEzZTEiLAogICJuZXdfdmVyc2lvbiI6ICIxLjYyIiwKICAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImh0dHBzOi8vY2RuM2QuaWNvbnNjb3V0LmNvbS8zZC9wcmVtaXVtL3RodW1iL2hvdXNlLXdpdGgtZmluYW5jaWFsLWNhbGN1bGF0b3ItM2QtaWNvbi1wbmctZG93bmxvYWQtMTQwODk1MDQucG5nIiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciLAogICAgICAicHVycG9zZSI6ICJhbnkgbWFza2FibGUiCiAgICB9CiAgXQp9">
 
     <style>
         * {
@@ -346,11 +346,13 @@
             position: sticky;
             top: 0;
             z-index: 10;
+            white-space: nowrap;
         }
         table.amort-table td {
             padding: 10px 15px;
             border-bottom: 1px solid #edf2f7;
             color: #4a5568;
+            white-space: nowrap;
         }
         table.amort-table tr:hover {
             background-color: #f7fafc;
@@ -427,6 +429,10 @@
                 align-items: center;
                 gap: 10px;
             }
+            table.amort-table th, table.amort-table td {
+                padding: 8px 10px;
+                font-size: 0.78rem;
+            }
         }
     </style>
 </head>
@@ -491,21 +497,21 @@
                         <label for="emi-amount">Loan Amount</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">₹</span>
-                            <input type="text" id="emi-amount" inputmode="numeric" placeholder="Enter loan amount" oninput="handleCurrencyInput(this, calculateEMI)">
+                            <input type="text" id="emi-amount" inputmode="decimal" placeholder="Enter loan amount" oninput="handleCurrencyInput(this, calculateEMI)">
                         </div>
                     </div>
                     <div class="input-group">
                         <label for="emi-interest">Interest Rate (p.a.)</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">%</span>
-                            <input type="number" step="0.05" id="emi-interest" inputmode="decimal" placeholder="Enter interest rate" oninput="calculateEMI()">
+                            <input type="number" step="any" id="emi-interest" inputmode="decimal" placeholder="Enter interest rate" oninput="calculateEMI()">
                         </div>
                     </div>
                     <div class="input-group">
                         <label for="emi-tenure">Tenure (Years)</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">Yr</span>
-                            <input type="number" id="emi-tenure" inputmode="numeric" placeholder="Enter tenure in years" oninput="calculateEMI()">
+                            <input type="number" step="any" id="emi-tenure" inputmode="decimal" placeholder="Enter tenure in years" oninput="calculateEMI()">
                         </div>
                     </div>
                 </div>
@@ -562,21 +568,21 @@
                         <label for="el-salary">Gross Monthly Income / Salary</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">₹</span>
-                            <input type="text" id="el-salary" inputmode="numeric" placeholder="Enter gross monthly salary" oninput="handleCurrencyInput(this, calculateEligibility)">
+                            <input type="text" id="el-salary" inputmode="decimal" placeholder="Enter gross monthly salary" oninput="handleCurrencyInput(this, calculateEligibility)">
                         </div>
                     </div>
                     <div class="input-group">
                         <label for="el-age">Age of Applicant</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">Yo</span>
-                            <input type="number" id="el-age" inputmode="numeric" placeholder="Enter applicant age" min="18" max="70" oninput="calculateEligibility()">
+                            <input type="number" step="any" id="el-age" inputmode="decimal" placeholder="Enter applicant age" min="18" max="70" oninput="calculateEligibility()">
                         </div>
                     </div>
                     <div class="input-group">
                         <label for="el-obligations">Existing Monthly EMI Obligations</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">₹</span>
-                            <input type="text" id="el-obligations" inputmode="numeric" placeholder="Enter current EMIs if any" oninput="handleCurrencyInput(this, calculateEligibility)">
+                            <input type="text" id="el-obligations" inputmode="decimal" placeholder="Enter current EMIs if any" oninput="handleCurrencyInput(this, calculateEligibility)">
                         </div>
                     </div>
                     <div class="input-group">
@@ -623,28 +629,28 @@
                         <label for="ps-carpet">Carpet Area</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">Sq</span>
-                            <input type="number" id="ps-carpet" inputmode="numeric" placeholder="Enter carpet area (sqft)" oninput="runPriceEngine('forward')">
+                            <input type="number" step="any" id="ps-carpet" inputmode="decimal" placeholder="Enter carpet area (sqft)" oninput="runPriceEngine('forward')">
                         </div>
                     </div>
                     <div class="input-group">
                         <label for="ps-rate">Per Sq. Ft. Price</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">₹</span>
-                            <input type="text" id="ps-rate" inputmode="numeric" placeholder="Enter rate per sqft" oninput="handleCurrencyInput(this, function(){ runPriceEngine('forward'); })">
+                            <input type="text" id="ps-rate" inputmode="decimal" placeholder="Enter rate per sqft" oninput="handleCurrencyInput(this, function(){ runPriceEngine('forward'); })">
                         </div>
                     </div>
                     <div class="input-group">
                         <label for="ps-agreement">Agreement Value</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">₹</span>
-                            <input type="text" id="ps-agreement" inputmode="numeric" placeholder="Enter agreement value" oninput="handleCurrencyInput(this, function(){ runPriceEngine('agreement-change'); })">
+                            <input type="text" id="ps-agreement" inputmode="decimal" placeholder="Enter agreement value" oninput="handleCurrencyInput(this, function(){ runPriceEngine('agreement-change'); })">
                         </div>
                     </div>
                     <div class="input-group">
                         <label>Car Parking Allowance</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">₹</span>
-                            <input type="text" id="ps-parking" inputmode="numeric" value="10,00,000" oninput="handleCurrencyInput(this, function(){ runPriceEngine('forward'); })">
+                            <input type="text" id="ps-parking" inputmode="decimal" value="10,00,000" oninput="handleCurrencyInput(this, function(){ runPriceEngine('forward'); })">
                         </div>
                     </div>
                 </div>
@@ -654,7 +660,7 @@
                         <label for="ps-allin" style="color:var(--text-main); font-weight:700;">ALL-INCLUSIVE ESTIMATED PRICE</label>
                         <div class="input-wrapper">
                             <span class="input-prefix" style="color:var(--brand-dark)">₹</span>
-                            <input type="text" id="ps-allin" inputmode="numeric" placeholder="Enter targeted all-in price" style="border-color:var(--brand-color); font-weight:700; color:var(--brand-dark); font-size:1.1rem" oninput="handleCurrencyInput(this, function(){ runPriceEngine('backward'); })">
+                            <input type="text" id="ps-allin" inputmode="decimal" placeholder="Enter targeted all-in price" style="border-color:var(--brand-color); font-weight:700; color:var(--brand-dark); font-size:1.1rem" oninput="handleCurrencyInput(this, function(){ runPriceEngine('backward'); })">
                         </div>
                     </div>
 
@@ -697,42 +703,42 @@
                         <label>Square Feet (Sq. Ft.)</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">Ft²</span>
-                            <input type="number" id="conv-sqft" inputmode="decimal" placeholder="Enter Square Feet" oninput="convertAreaUnits('sqft')">
+                            <input type="number" step="any" id="conv-sqft" inputmode="decimal" placeholder="Enter Square Feet" oninput="convertAreaUnits('sqft')">
                         </div>
                     </div>
                     <div class="input-group">
                         <label>Square Meters (Sq. M.)</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">M²</span>
-                            <input type="number" id="conv-sqm" inputmode="decimal" placeholder="Enter Square Meters" oninput="convertAreaUnits('sqm')">
+                            <input type="number" step="any" id="conv-sqm" inputmode="decimal" placeholder="Enter Square Meters" oninput="convertAreaUnits('sqm')">
                         </div>
                     </div>
                     <div class="input-group">
                         <label>Acres</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">Ac</span>
-                            <input type="number" id="conv-acres" inputmode="decimal" placeholder="Enter Acres" oninput="convertAreaUnits('acres')">
+                            <input type="number" step="any" id="conv-acres" inputmode="decimal" placeholder="Enter Acres" oninput="convertAreaUnits('acres')">
                         </div>
                     </div>
                     <div class="input-group">
                         <label>Guntas (Guntha)</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">Gt</span>
-                            <input type="number" id="conv-guntas" inputmode="decimal" placeholder="Enter Guntas" oninput="convertAreaUnits('guntas')">
+                            <input type="number" step="any" id="conv-guntas" inputmode="decimal" placeholder="Enter Guntas" oninput="convertAreaUnits('guntas')">
                         </div>
                     </div>
                     <div class="input-group">
                         <label>Bighas (Standard)</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">Bh</span>
-                            <input type="number" id="conv-bigha" inputmode="decimal" placeholder="Enter Bighas" oninput="convertAreaUnits('bigha')">
+                            <input type="number" step="any" id="conv-bigha" inputmode="decimal" placeholder="Enter Bighas" oninput="convertAreaUnits('bigha')">
                         </div>
                     </div>
                     <div class="input-group">
                         <label>Hectares</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">Ha</span>
-                            <input type="number" id="conv-hectares" inputmode="decimal" placeholder="Enter Hectares" oninput="convertAreaUnits('hectares')">
+                            <input type="number" step="any" id="conv-hectares" inputmode="decimal" placeholder="Enter Hectares" oninput="convertAreaUnits('hectares')">
                         </div>
                     </div>
                 </div>
@@ -787,6 +793,7 @@
 
         function exitToDashboard() {
             document.querySelectorAll('.tool-section').forEach(sec => sec.style.display = 'none');
+            document.getElementById('main-app-dashboard').style.block = 'block';
             document.getElementById('main-app-dashboard').style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -836,25 +843,52 @@
 
         function formatIndianCurrency(num) {
             if (isNaN(num) || num === null || num === 0) return "0";
-            let x = Math.round(num).toString();
-            let lastThree = x.substring(x.length - 3);
-            let otherBits = x.substring(0, x.length - 3);
+            
+            let parts = num.toString().split('.');
+            let integerPart = Math.round(parseFloat(parts[0])).toString();
+            let decimalPart = parts[1] ? '.' + parts[1].substring(0, 2) : '';
+            
+            let lastThree = integerPart.substring(integerPart.length - 3);
+            let otherBits = integerPart.substring(0, integerPart.length - 3);
             if (otherBits !== '') lastThree = ',' + lastThree;
-            return otherBits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+            
+            return otherBits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree + decimalPart;
         }
 
         function handleCurrencyInput(inputElement, callback) {
             let selectionStart = inputElement.selectionStart;
             let oldLength = inputElement.value.length;
             
-            let pureNum = inputElement.value.replace(/[^0-9]/g, '');
+            // Allow numbers and full-stops only
+            let pureNum = inputElement.value.replace(/[^0-9.]/g, '');
+            
+            // Erase duplicate full stops if entered
+            let points = pureNum.split('.');
+            if (points.length > 2) {
+                pureNum = points[0] + '.' + points.slice(1).join('');
+            }
+            
             if (pureNum === "") {
                 inputElement.value = "";
                 if(callback) callback();
                 return;
             }
             
-            let formatted = formatIndianCurrency(parseInt(pureNum, 10));
+            let formatted = "";
+            if (pureNum.endsWith('.')) {
+                let parsedInt = parseInt(pureNum, 10) || 0;
+                formatted = (parsedInt === 0 && pureNum === '.') ? '.' : formatIndianCurrency(parsedInt) + '.';
+            } else {
+                let floatVal = parseFloat(pureNum) || 0;
+                if (pureNum.includes('.')) {
+                    let decimals = pureNum.split('.')[1];
+                    let intPart = parseInt(pureNum.split('_')[0] || pureNum.split('.')[0], 10) || 0;
+                    formatted = formatIndianCurrency(intPart) + '.' + decimals;
+                } else {
+                    formatted = formatIndianCurrency(floatVal);
+                }
+            }
+            
             inputElement.value = formatted;
             
             let newLength = formatted.length;
