@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Real Estate Calculator - v1.6</title>
+    <title>Real Estate Calculator - v1.61</title>
     
     <meta name="theme-color" content="#92a3e1">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
     <link rel="icon" type="image/png" href="https://cdn3d.iconscout.com/3d/premium/thumb/house-with-financial-calculator-3d-icon-png-download-14089504.png">
     <link rel="apple-touch-icon" href="https://cdn3d.iconscout.com/3d/premium/thumb/house-with-financial-calculator-3d-icon-png-download-14089504.png">
     
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlJlYWwgRXN0YXRlIENhbGN1bGF0b3IiLAogICJzaG9ydF9uYW1lIjogIlJFIENhbGMiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2Y0ZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiM5MmEzZTEiLAogICJuZXdfdmVyc2lvbiI6ICIxLjYiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJodHRwczovL2NkbjNkLmljb25zY291dC5jb20vM2QvcHJlbWl1bS90aHVtYi9ob3VzZS13aXRoLWZpbmFuY2lhbC1jYWxjdWxhdG9yLTNkLWljb24tcG5nLWRvd25sb2FkLTE0MDg5NTA0LnBuZyIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIiwKICAgICAgInB1cnBvc2UiOiAiYW55IG1hc2thYmxlIiwKICAgIH0KICBdCn0=">
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlJlYWwgRXN0YXRlIENhbGN1bGF0b3IiLAogICJzaG9ydF9uYW1lIjogIlJFIENhbGMiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2Y0ZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiM5MmEzZTEiLAogICJuZXdfdmVyc2lvbiI6ICIxLjYxIiwKICAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImh0dHBzOi8vY2RuM2QuaWNvbnNjb3V0LmNvbS8zZC9wcmVtaXVtL3RodW1iL2hvdXNlLXdpdGgtZmluYW5jaWFsLWNhbGN1bGF0b3ItM2QtaWNvbi1wbmctZG93bmxvYWQtMTQwODk1MDQucG5nIiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciLAogICAgICAicHVycG9zZSI6ICJhbnkgbWFza2FibGUiCiAgICB9CiAgXQp9">
 
     <style>
         * {
@@ -49,7 +49,7 @@
             touch-action: pan-x pan-y;
         }
 
-        /* 2 SEC TO 3 SEC RANDOM SPLASH SCREEN OVERLAY */
+        /* CUSTOM SPLASH LOADER ENGINE SCREEN */
         #custom-splash-screen {
             position: fixed;
             top: 0;
@@ -85,21 +85,19 @@
         header {
             background-color: var(--card-bg);
             box-shadow: 0 4px 20px rgba(146, 163, 225, 0.08);
-            padding: 10px 20px;
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            gap: 15px;
             border-bottom: 1px solid rgba(146, 163, 225, 0.15);
         }
         .branding {
             display: flex;
             align-items: center;
-            gap: 10px;
-            flex-shrink: 0;
+            gap: 12px;
         }
         .logo-container img {
             height: 38px;
@@ -107,7 +105,7 @@
             display: block;
         }
         .app-name-title {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--text-main);
         }
@@ -121,92 +119,114 @@
             border: 1px solid rgba(146, 163, 225, 0.3);
         }
 
-        /* HORIZONTAL BUTTONS LAYOUT ENGINE (Button | Button | Button | Button) */
-        .header-nav {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-        .tab-radio {
-            position: absolute;
-            opacity: 0;
-            width: 0; height: 0;
-        }
-        .tab-label {
-            background: var(--card-bg);
-            border: 1.5px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 6px 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s ease;
-        }
-        .tab-label img {
-            width: 20px;
-            height: 20px;
-            object-fit: contain;
-        }
-        .tab-label.converter-label-img img {
-            border-radius: 4px;
-            object-fit: contain;
-        }
-        .tab-label h3 {
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            font-weight: 600;
-            white-space: nowrap;
-        }
-        .tab-label:hover {
-            border-color: var(--brand-color);
-            background-color: var(--brand-light);
-        }
-        
-        .tab-radio:checked + .tab-label {
-            background: #edf2f7;
-            border-color: #3182ce;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
-        }
-        .tab-radio:checked + .tab-label h3 {
-            color: #3182ce;
-        }
-
         .container {
             max-width: 1140px;
             margin: 20px auto;
             padding: 0 15px;
         }
-        
+
+        /* APP CENTRAL ROUTER DASHBOARD GRID LAYOUT */
+        .dashboard-wrapper {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        .dashboard-heading {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            font-weight: 600;
+            padding-left: 2px;
+        }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .tool-card {
+            background: var(--card-bg);
+            border: 1.5px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 25px 20px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 15px;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.01);
+        }
+        .tool-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--brand-color);
+            box-shadow: 0 10px 20px rgba(146, 163, 225, 0.1);
+        }
+        .tool-card:active {
+            transform: scale(0.98);
+        }
+        .tool-card img {
+            width: 56px;
+            height: 56px;
+            object-fit: contain;
+        }
+        .tool-card h3 {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        /* FULL SCREEN SECTION MANAGEMENT LAYOUT */
         .tool-section {
             background: var(--card-bg);
-            border-radius: 14px;
+            border-radius: 16px;
             padding: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.03);
             margin-bottom: 25px;
             display: none;
             border: 1px solid #edf2f7;
+            animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
         
         .section-title {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             color: var(--text-main);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: space-between;
             border-bottom: 2px solid #f1f5f9;
-            padding-bottom: 10px;
+            padding-bottom: 12px;
             font-weight: 700;
         }
+        .title-left-block {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
         .section-title img {
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             object-fit: contain;
         }
-        .section-title.converter-title-img img {
-            border-radius: 4px;
-            object-fit: contain;
+        
+        /* NAVIGATION ACTIONS BACK DASHBOARD LINKS */
+        .back-dash-btn {
+            background: #f1f5f9;
+            color: #475569;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        .back-dash-btn:hover {
+            background: var(--brand-light);
+            color: var(--brand-dark);
         }
 
         .calculator-grid {
@@ -292,7 +312,6 @@
         .result-value.highlight { color: #3182ce; }
         .result-value.success { color: #38a169; }
         
-        /* TIMELINE AMORTIZATION TABLE LAYOUT */
         .amortization-wrapper {
             margin-top: 30px;
             grid-column: span 2;
@@ -369,38 +388,32 @@
             font-size: 0.8rem;
         }
 
-        /* MOBILE FIX: STRICT HORIZONTAL ROW (BUTTON | BUTTON | BUTTON | BUTTON) */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* RESPONSIVE LAYOUT ENGINE FOR DASHBOARD GRID SETUP */
         @media (max-width: 868px) {
-            header {
-                flex-direction: column;
-                padding: 10px;
+            .dashboard-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            .tool-card {
+                padding: 20px 15px;
+                border-radius: 14px;
                 gap: 10px;
             }
-            .branding {
-                margin-bottom: 2px;
+            .tool-card img {
+                width: 44px;
+                height: 44px;
             }
-            .header-nav {
-                width: 100%;
-                display: grid;
-                grid-template-columns: repeat(4, 1fr); /* STRIP MATRIX TO FORCED EQUAL 4 COLS */
-                gap: 4px; /* MINIFIED SPACING FOR MAXIMUM SCREEN RETENTION */
-            }
-            .tab-label {
-                width: 100%;
-                padding: 6px 2px;
-                flex-direction: column; /* ICON UP, TEXT DOWN FOR COMPACT FIT */
-                justify-content: center;
-                align-items: center;
-                gap: 4px;
-                border-radius: 8px;
-            }
-            .tab-label img {
-                width: 16px;
-                height: 16px;
-            }
-            .tab-label h3 { 
-                font-size: 0.65rem; /* MICRO TEXT FIT FOR ULTRA COMPACT ROW */
-                letter-spacing: -0.02em;
+            .tool-card h3 {
+                font-size: 0.85rem;
             }
             .calculator-grid, .price-split-grid {
                 grid-template-columns: 1fr;
@@ -409,6 +422,11 @@
             .amortization-wrapper {
                 grid-column: span 1;
             }
+            .section-title {
+                flex-direction: row;
+                align-items: center;
+                gap: 10px;
+            }
         }
     </style>
 </head>
@@ -416,52 +434,56 @@
 
     <div id="custom-splash-screen">
         <div class="splash-frame">
-            <img src="https://i.postimg.cc/DzRbNnd2/Real-Estate-Calculator-(1).gif" alt="Real Estate Core Engine Init">
+            <img src="https://i.postimg.cc/5yQkgmKm/Real-Estate-Calculator-(2).gif" alt="Real Estate Core Engine Init">
         </div>
     </div>
 
     <header>
-        <div class="branding">
+        <div class="branding" onclick="exitToDashboard()" style="cursor: pointer;">
             <div class="logo-container">
-                <img src="https://cdn3d.iconscout.com/3d/premium/thumb/house-with-financial-calculator-3d-icon-png-download-14089504.png" alt="Real Estate Logo">
+                <img src="https://cdn3d.iconscout.com/3d/premium/thumb/house-with-financial-calculator-3d-icon-png-download-14089504.png" alt="Real Estate Calculator Default Brand Asset Logo">
             </div>
             <h1 class="app-name-title">Real Estate Calculator</h1>
-            <div class="version-tag">v1.6</div>
+            <div class="version-tag">v1.61</div>
         </div>
-        
-        <nav class="header-nav">
-            <input type="radio" id="radio-emi" name="tool-tabs" class="tab-radio" checked>
-            <label for="radio-emi" class="tab-label" onclick="showSection('emi-calc')">
-                <img src="https://static.vecteezy.com/system/resources/thumbnails/018/972/682/small/calculator-3d-application-icon-png.png" alt="EMI">
-                <h3>EMI Calc</h3>
-            </label>
-            
-            <input type="radio" id="radio-eligibility" name="tool-tabs" class="tab-radio">
-            <label for="radio-eligibility" class="tab-label" onclick="showSection('eligibility-calc')">
-                <img src="https://static.vecteezy.com/system/resources/thumbnails/036/585/013/small/a-3d-bank-and-hand-on-a-transparent-background-free-png.png" alt="Eligible">
-                <h3>Eligibility</h3>
-            </label>
-            
-            <input type="radio" id="radio-price" name="tool-tabs" class="tab-radio">
-            <label for="radio-price" class="tab-label" onclick="showSection('price-sheet')">
-                <img src="https://static.vecteezy.com/system/resources/thumbnails/028/727/063/small/price-tag-sale-label-png.png" alt="Price">
-                <h3>Price Sheet</h3>
-            </label>
-
-            <input type="radio" id="radio-converter" name="tool-tabs" class="tab-radio">
-            <label for="radio-converter" class="tab-label converter-label-img" onclick="showSection('area-converter-sec')">
-                <img src="https://static.vecteezy.com/system/resources/thumbnails/068/083/907/small/yellow-tape-measure-icon-cartoon-style-illustration-isolated-on-a-transparent-background-png.png" alt="Convert">
-                <h3>Area Conv</h3>
-            </label>
-        </nav>
     </header>
 
     <div class="container">
 
-        <section id="emi-calc" class="tool-section" style="display: block;">
+        <div id="main-app-dashboard" class="dashboard-wrapper">
+            <h2 class="dashboard-heading">Select Calculative Core Engine</h2>
+            <div class="dashboard-grid">
+                
+                <div class="tool-card" onclick="launchTool('emi-calc')">
+                    <img src="https://i.postimg.cc/x8GL9Jcv/image.png" alt="EMI">
+                    <h3>EMI Calculator</h3>
+                </div>
+                
+                <div class="tool-card" onclick="launchTool('eligibility-calc')">
+                    <img src="https://i.postimg.cc/LsZYHYWj/image.png" alt="Eligibility">
+                    <h3>Loan Eligibility</h3>
+                </div>
+                
+                <div class="tool-card" onclick="launchTool('price-sheet')">
+                    <img src="https://i.postimg.cc/02Byb5Dc/image.png" alt="Price">
+                    <h3>Cost Sheet</h3>
+                </div>
+                
+                <div class="tool-card" onclick="launchTool('area-converter-sec')">
+                    <img src="https://i.postimg.cc/Mpqdfxw1/image.png" alt="Converter">
+                    <h3>Area Converter</h3>
+                </div>
+
+            </div>
+        </div>
+
+        <section id="emi-calc" class="tool-section">
             <div class="section-title">
-                <img src="https://static.vecteezy.com/system/resources/thumbnails/018/972/682/small/calculator-3d-application-icon-png.png" alt="">
-                <h2>EMI Calculator</h2>
+                <div class="title-left-block">
+                    <img src="https://i.postimg.cc/x8GL9Jcv/image.png" alt="">
+                    <h2>EMI Calculator</h2>
+                </div>
+                <button class="back-dash-btn" onclick="exitToDashboard()">← Back</button>
             </div>
             <div class="calculator-grid">
                 <div class="calculator-inputs">
@@ -469,21 +491,21 @@
                         <label for="emi-amount">Loan Amount</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">₹</span>
-                            <input type="text" id="emi-amount" placeholder="Enter loan amount" oninput="handleCurrencyInput(this, calculateEMI)">
+                            <input type="text" id="emi-amount" inputmode="numeric" placeholder="Enter loan amount" oninput="handleCurrencyInput(this, calculateEMI)">
                         </div>
                     </div>
                     <div class="input-group">
                         <label for="emi-interest">Interest Rate (p.a.)</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">%</span>
-                            <input type="number" step="0.05" id="emi-interest" placeholder="Enter interest rate" oninput="calculateEMI()">
+                            <input type="number" step="0.05" id="emi-interest" inputmode="decimal" placeholder="Enter interest rate" oninput="calculateEMI()">
                         </div>
                     </div>
                     <div class="input-group">
                         <label for="emi-tenure">Tenure (Years)</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">Yr</span>
-                            <input type="number" id="emi-tenure" placeholder="Enter tenure in years" oninput="calculateEMI()">
+                            <input type="number" id="emi-tenure" inputmode="numeric" placeholder="Enter tenure in years" oninput="calculateEMI()">
                         </div>
                     </div>
                 </div>
@@ -528,8 +550,11 @@
 
         <section id="eligibility-calc" class="tool-section">
             <div class="section-title">
-                <img src="https://static.vecteezy.com/system/resources/thumbnails/036/585/013/small/a-3d-bank-and-hand-on-a-transparent-background-free-png.png" alt="">
-                <h2>Loan Eligibility Calculator</h2>
+                <div class="title-left-block">
+                    <img src="https://i.postimg.cc/LsZYHYWj/image.png" alt="">
+                    <h2>Loan Eligibility Calculator</h2>
+                </div>
+                <button class="back-dash-btn" onclick="exitToDashboard()">← Back</button>
             </div>
             <div class="calculator-grid">
                 <div class="calculator-inputs">
@@ -537,28 +562,28 @@
                         <label for="el-salary">Gross Monthly Income / Salary</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">₹</span>
-                            <input type="text" id="el-salary" placeholder="Enter gross monthly salary" oninput="handleCurrencyInput(this, calculateEligibility)">
+                            <input type="text" id="el-salary" inputmode="numeric" placeholder="Enter gross monthly salary" oninput="handleCurrencyInput(this, calculateEligibility)">
                         </div>
                     </div>
                     <div class="input-group">
                         <label for="el-age">Age of Applicant</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">Yo</span>
-                            <input type="number" id="el-age" placeholder="Enter applicant age" min="18" max="70" oninput="calculateEligibility()">
+                            <input type="number" id="el-age" inputmode="numeric" placeholder="Enter applicant age" min="18" max="70" oninput="calculateEligibility()">
                         </div>
                     </div>
                     <div class="input-group">
                         <label for="el-obligations">Existing Monthly EMI Obligations</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">₹</span>
-                            <input type="text" id="el-obligations" placeholder="Enter current EMIs if any" oninput="handleCurrencyInput(this, calculateEligibility)">
+                            <input type="text" id="el-obligations" inputmode="numeric" placeholder="Enter current EMIs if any" oninput="handleCurrencyInput(this, calculateEligibility)">
                         </div>
                     </div>
                     <div class="input-group">
                         <label for="el-interest">Expected Interest Rate (p.a.)</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">%</span>
-                            <input type="number" step="0.05" id="el-interest" placeholder="Enter expected interest rate" oninput="calculateEligibility()">
+                            <input type="number" step="0.05" id="el-interest" inputmode="decimal" placeholder="Enter expected interest rate" oninput="calculateEligibility()">
                         </div>
                     </div>
                 </div>
@@ -585,8 +610,11 @@
 
         <section id="price-sheet" class="tool-section">
             <div class="section-title">
-                <img src="https://static.vecteezy.com/system/resources/thumbnails/028/727/063/small/price-tag-sale-label-png.png" alt="">
-                <h2>Price Calculator</h2>
+                <div class="title-left-block">
+                    <img src="https://i.postimg.cc/02Byb5Dc/image.png" alt="">
+                    <h2>Price Calculator</h2>
+                </div>
+                <button class="back-dash-btn" onclick="exitToDashboard()">← Back</button>
             </div>
             
             <div class="price-split-grid">
@@ -595,28 +623,28 @@
                         <label for="ps-carpet">Carpet Area</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">Sq</span>
-                            <input type="number" id="ps-carpet" placeholder="Enter carpet area (sqft)" oninput="runPriceEngine('forward')">
+                            <input type="number" id="ps-carpet" inputmode="numeric" placeholder="Enter carpet area (sqft)" oninput="runPriceEngine('forward')">
                         </div>
                     </div>
                     <div class="input-group">
                         <label for="ps-rate">Per Sq. Ft. Price</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">₹</span>
-                            <input type="text" id="ps-rate" placeholder="Enter rate per sqft" oninput="handleCurrencyInput(this, function(){ runPriceEngine('forward'); })">
+                            <input type="text" id="ps-rate" inputmode="numeric" placeholder="Enter rate per sqft" oninput="handleCurrencyInput(this, function(){ runPriceEngine('forward'); })">
                         </div>
                     </div>
                     <div class="input-group">
                         <label for="ps-agreement">Agreement Value</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">₹</span>
-                            <input type="text" id="ps-agreement" placeholder="Enter agreement value" oninput="handleCurrencyInput(this, function(){ runPriceEngine('agreement-change'); })">
+                            <input type="text" id="ps-agreement" inputmode="numeric" placeholder="Enter agreement value" oninput="handleCurrencyInput(this, function(){ runPriceEngine('agreement-change'); })">
                         </div>
                     </div>
                     <div class="input-group">
                         <label>Car Parking Allowance</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">₹</span>
-                            <input type="text" id="ps-parking" value="10,00,000" oninput="handleCurrencyInput(this, function(){ runPriceEngine('forward'); })">
+                            <input type="text" id="ps-parking" inputmode="numeric" value="10,00,000" oninput="handleCurrencyInput(this, function(){ runPriceEngine('forward'); })">
                         </div>
                     </div>
                 </div>
@@ -626,7 +654,7 @@
                         <label for="ps-allin" style="color:var(--text-main); font-weight:700;">ALL-INCLUSIVE ESTIMATED PRICE</label>
                         <div class="input-wrapper">
                             <span class="input-prefix" style="color:var(--brand-dark)">₹</span>
-                            <input type="text" id="ps-allin" placeholder="Enter targeted all-in price" style="border-color:var(--brand-color); font-weight:700; color:var(--brand-dark); font-size:1.1rem" oninput="handleCurrencyInput(this, function(){ runPriceEngine('backward'); })">
+                            <input type="text" id="ps-allin" inputmode="numeric" placeholder="Enter targeted all-in price" style="border-color:var(--brand-color); font-weight:700; color:var(--brand-dark); font-size:1.1rem" oninput="handleCurrencyInput(this, function(){ runPriceEngine('backward'); })">
                         </div>
                     </div>
 
@@ -656,9 +684,12 @@
         </section>
 
         <section id="area-converter-sec" class="tool-section">
-            <div class="section-title converter-title-img">
-                <img src="https://static.vecteezy.com/system/resources/thumbnails/068/083/907/small/yellow-tape-measure-icon-cartoon-style-illustration-isolated-on-a-transparent-background-png.png" alt="">
-                <h2>Area Converter</h2>
+            <div class="section-title">
+                <div class="title-left-block">
+                    <img src="https://i.postimg.cc/Mpqdfxw1/image.png" alt="">
+                    <h2>Area Converter</h2>
+                </div>
+                <button class="back-dash-btn" onclick="exitToDashboard()">← Back</button>
             </div>
             <div class="calculator-grid">
                 <div class="calculator-inputs">
@@ -666,42 +697,42 @@
                         <label>Square Feet (Sq. Ft.)</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">Ft²</span>
-                            <input type="number" id="conv-sqft" placeholder="Enter Square Feet" oninput="convertAreaUnits('sqft')">
+                            <input type="number" id="conv-sqft" inputmode="decimal" placeholder="Enter Square Feet" oninput="convertAreaUnits('sqft')">
                         </div>
                     </div>
                     <div class="input-group">
                         <label>Square Meters (Sq. M.)</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">M²</span>
-                            <input type="number" id="conv-sqm" placeholder="Enter Square Meters" oninput="convertAreaUnits('sqm')">
+                            <input type="number" id="conv-sqm" inputmode="decimal" placeholder="Enter Square Meters" oninput="convertAreaUnits('sqm')">
                         </div>
                     </div>
                     <div class="input-group">
                         <label>Acres</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">Ac</span>
-                            <input type="number" id="conv-acres" placeholder="Enter Acres" oninput="convertAreaUnits('acres')">
+                            <input type="number" id="conv-acres" inputmode="decimal" placeholder="Enter Acres" oninput="convertAreaUnits('acres')">
                         </div>
                     </div>
                     <div class="input-group">
                         <label>Guntas (Guntha)</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">Gt</span>
-                            <input type="number" id="conv-guntas" placeholder="Enter Guntas" oninput="convertAreaUnits('guntas')">
+                            <input type="number" id="conv-guntas" inputmode="decimal" placeholder="Enter Guntas" oninput="convertAreaUnits('guntas')">
                         </div>
                     </div>
                     <div class="input-group">
                         <label>Bighas (Standard)</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">Bh</span>
-                            <input type="number" id="conv-bigha" placeholder="Enter Bighas" oninput="convertAreaUnits('bigha')">
+                            <input type="number" id="conv-bigha" inputmode="decimal" placeholder="Enter Bighas" oninput="convertAreaUnits('bigha')">
                         </div>
                     </div>
                     <div class="input-group">
                         <label>Hectares</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">Ha</span>
-                            <input type="number" id="conv-hectares" placeholder="Enter Hectares" oninput="convertAreaUnits('hectares')">
+                            <input type="number" id="conv-hectares" inputmode="decimal" placeholder="Enter Hectares" oninput="convertAreaUnits('hectares')">
                         </div>
                     </div>
                 </div>
@@ -724,7 +755,7 @@
     </div>
 
     <script>
-        // CORE INTEGRATION: STRICT TIME CONTROLS FOR DYNAMIC SPLASH OVERLAY (2-3 Sec Random)
+        // STRICT RANDOM TIMEOUT OVERLAY SYSTEM DISPLAY CONTROLLER FOR LOADER GIF
         window.addEventListener('DOMContentLoaded', () => {
             const randomSplashDuration = Math.floor(Math.random() * (3000 - 2000 + 1)) + 2000;
             
@@ -738,19 +769,29 @@
             }, randomSplashDuration);
         });
 
-        // App System Multi-Touch Configuration Blockers
+        // App Interaction Security Guards
         document.addEventListener('wheel', function(e) { if (e.ctrlKey) e.preventDefault(); }, { passive: false });
         document.addEventListener('keydown', function(e) {
             if (e.ctrlKey && (e.key === '=' || e.key === '-' || e.key === '+' || e.key === '_')) e.preventDefault();
         });
 
-        // Route UI Sections
-        function showSection(id) {
+        // CENTRAL DASHBOARD DYNAMIC MANAGER
+        function launchTool(toolId) {
+            document.getElementById('main-app-dashboard').style.display = 'none';
             document.querySelectorAll('.tool-section').forEach(sec => sec.style.display = 'none');
-            document.getElementById(id).style.display = 'block';
+            
+            const targetSection = document.getElementById(toolId);
+            targetSection.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // FULLY INTEGRATED EXTENDED REAL ESTATE AREA CONVERTER CORE
+        function exitToDashboard() {
+            document.querySelectorAll('.tool-section').forEach(sec => sec.style.display = 'none');
+            document.getElementById('main-app-dashboard').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // MATRIX AREA CONVERTER ALGORITHM BLOCK
         function convertAreaUnits(originUnit) {
             const fields = {
                 sqft: document.getElementById('conv-sqft'),
@@ -823,7 +864,7 @@
             if(callback) callback();
         }
 
-        // EMI COMPUTATION ENGINE + DYNAMIC AMORTIZATION BREAKDOWN SCHEDULE
+        // EMI CALCULATION CORE ENGINE
         function calculateEMI() {
             let principal = getPureNumber(document.getElementById('emi-amount').value);
             let interestRate = parseFloat(document.getElementById('emi-interest').value) || 0;
@@ -901,6 +942,7 @@
             tableBody.innerHTML = tableHTMLBuffer;
         }
 
+        // BANK FOIR BASED ELIGIBILITY CALCULATION ENGINE
         function calculateEligibility() {
             let grossSalary = getPureNumber(document.getElementById('el-salary').value);
             let age = parseInt(document.getElementById('el-age').value) || 0;
@@ -942,6 +984,7 @@
             document.getElementById('render-el-loan').innerText = "₹ " + formatIndianCurrency(eligibleLoan);
         }
 
+        // TWO-WAY DYNAMIC PRICING ENGINE
         function runPriceEngine(direction) {
             let carpet = parseFloat(document.getElementById('ps-carpet').value) || 0;
             let parking = getPureNumber(document.getElementById('ps-parking').value);
