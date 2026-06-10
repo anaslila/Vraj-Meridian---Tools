@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Under Maintenance</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fb;
+            color: #1e293b;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .maintenance-container {
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(146, 163, 225, 0.15);
+            max-width: 450px;
+            width: 100%;
+            border: 1px solid rgba(146, 163, 225, 0.2);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .gif-wrapper {
+            width: 100%;
+            max-width: 250px;
+            margin: 0 auto 25px auto;
+        }
+
+        .gif-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 12px;
+        }
+
+        p {
+            font-size: 0.95rem;
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background-color: #f0f3ff;
+            color: #6d7fbf;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            border: 1px solid rgba(146, 163, 225, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="maintenance-container">
+        <div class="gif-wrapper">
+            <img src="https://i.postimg.cc/Y281QC4f/04489f0a-1168-11ee-acde-3f59cc25c37d.gif" alt="App Under Maintenance">
+        </div>
+        
+        <h1>We'll Be Back Soon!</h1>
+        <p>We are upgrading system modules to give you a smoother experience. Hold tight!</p>
+        
+        <div class="status-badge">🔧 System Upgrade In Progress</div>
+    </div>
+
+</body>
+</html>
