@@ -3,94 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App Under Maintenance</title>
+    <title>System Maintenance | Real Estate Calculation Suite</title>
     <style>
+        :root {
+            --brand-primary: #92a3e1;
+            --brand-dark: #4a557a;
+            --bg-surface: #f8fafc;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background-color: #f5f7fb;
-            color: #1e293b;
+            background-color: var(--bg-surface);
+            color: var(--text-main);
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: 20px;
+            padding: 24px;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .maintenance-container {
+        .maintenance-card {
             background: #ffffff;
-            padding: 40px 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(146, 163, 225, 0.15);
-            max-width: 450px;
+            padding: 50px 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(146, 163, 225, 0.1);
+            max-width: 500px;
             width: 100%;
-            border: 1px solid rgba(146, 163, 225, 0.2);
-            animation: fadeIn 0.5s ease-in-out;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            animation: cardReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .gif-wrapper {
-            width: 100%;
-            max-width: 250px;
-            margin: 0 auto 25px auto;
+        .brand-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 35px;
         }
 
-        .gif-wrapper img {
+        .brand-logo {
+            height: 28px;
+            width: auto;
+        }
+
+        .brand-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+
+        .visual-container {
+            width: 100%;
+            max-width: 220px;
+            margin: 0 auto 30px auto;
+            position: relative;
+        }
+
+        .visual-container img {
             width: 100%;
             height: auto;
             display: block;
-            object-fit: contain;
+            mix-blend-mode: multiply;
         }
 
         h1 {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            color: #1e293b;
+            color: var(--text-main);
             margin-bottom: 12px;
+            letter-spacing: -0.02em;
         }
 
         p {
-            font-size: 0.95rem;
-            color: #64748b;
+            font-size: 0.92rem;
+            color: var(--text-muted);
             line-height: 1.6;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
+            padding: 0 10px;
         }
 
-        .status-badge {
-            display: inline-block;
-            background-color: #f0f3ff;
-            color: #6d7fbf;
-            padding: 6px 16px;
-            border-radius: 20px;
+        .system-status-box {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             font-size: 0.82rem;
-            font-weight: 700;
-            border: 1px solid rgba(146, 163, 225, 0.3);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+        .status-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            color: var(--brand-dark);
+        }
+
+        .pulse-indicator {
+            width: 8px;
+            height: 8px;
+            background-color: #38a169;
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 rgba(56, 161, 105, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        .status-eta {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        @keyframes cardReveal {
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(56, 161, 105, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(56, 161, 105, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(56, 161, 105, 0); }
         }
     </style>
 </head>
 <body>
 
-    <div class="maintenance-container">
-        <div class="gif-wrapper">
-            <img src="https://i.postimg.cc/Y281QC4f/04489f0a-1168-11ee-acde-3f59cc25c37d.gif" alt="App Under Maintenance">
+    <div class="maintenance-card">
+        <div class="brand-header">
+            <img class="brand-logo" src="https://cdn3d.iconscout.com/3d/premium/thumb/house-with-financial-calculator-3d-icon-png-download-14089504.png" alt="Suite Logo">
+            <span class="brand-title">Real Estate Calculation Suite</span>
+        </div>
+
+        <div class="visual-container">
+            <img src="https://i.postimg.cc/Y281QC4f/04489f0a-1168-11ee-acde-3f59cc25c37d.gif" alt="System Maintenance Animation">
         </div>
         
-        <h1>We'll Be Back Soon!</h1>
-        <p>We are upgrading system modules to give you a smoother experience. Hold tight!</p>
+        <h1>System Optimization in Progress</h1>
+        <p>We are currently updating our core calculation matrices and performance routers to improve your user experience. Normal operations will resume shortly.</p>
         
-        <div class="status-badge">🔧 System Upgrade In Progress</div>
+        <div class="system-status-box">
+            <div class="status-left">
+                <div class="pulse-indicator"></div>
+                <span>Scheduled Upgrades</span>
+            </div>
+            <div class="status-eta">ETA: Under 45 Mins</div>
+        </div>
     </div>
 
 </body>
