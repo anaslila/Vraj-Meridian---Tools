@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Real Estate Calculator - v1.61</title>
+    <title>Real Estate Calculator - v1.63</title>
     
     <meta name="theme-color" content="#92a3e1">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
     <link rel="icon" type="image/png" href="https://cdn3d.iconscout.com/3d/premium/thumb/house-with-financial-calculator-3d-icon-png-download-14089504.png">
     <link rel="apple-touch-icon" href="https://cdn3d.iconscout.com/3d/premium/thumb/house-with-financial-calculator-3d-icon-png-download-14089504.png">
     
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlJlYWwgRXN0YXRlIENhbGN1bGF0b3IiLAogICJzaG9ydF9uYW1lIjogIlJFIENhbGMiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2Y0ZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiM5MmEzZTEiLAogICJuZXdfdmVyc2lvbiI6ICIxLjYyIiwKICAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImh0dHBzOi8vY2RuM2QuaWNvbnNjb3V0LmNvbS8zZC9wcmVtaXVtL3RodW1iL2hvdXNlLXdpdGgtZmluYW5jaWFsLWNhbGN1bGF0b3ItM2QtaWNvbi1wbmctZG93bmxvYWQtMTQwODk1MDQucG5nIiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciLAogICAgICAicHVycG9zZSI6ICJhbnkgbWFza2FibGUiCiAgICB9CiAgXQp9">
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlJlYWwgRXN0YXRlIENhbGN1bGF0b3IiLAogICJzaG9ydF9uYW1lIjogIlJFIENhbGMiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2Y0ZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiM5MmEzZTEiLAogICJuZXdfdmVyc2lvbiI6ICIxLjY0IiwKICAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImh0dHBzOi8vY2RuM2QuaWNvbnNjb3V0LmNvbS8zZC9wcmVtaXVtL3RodW1iL2hvdXNlLXdpdGgtZmluYW5jaWFsLWNhbGN1bGF0b3RefmNkbi1kb3dubG9hZC0xNDA4OTUwNC5wbmciLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIsCiAgICAgICJwdXJwb3NlIjogImFueSBtYXNrYWJsZSIKICAgIH0KICBfCn0=">
 
     <style>
         * {
@@ -49,7 +49,6 @@
             touch-action: pan-x pan-y;
         }
 
-        /* CUSTOM SPLASH LOADER ENGINE SCREEN */
         #custom-splash-screen {
             position: fixed;
             top: 0;
@@ -125,7 +124,6 @@
             padding: 0 15px;
         }
 
-        /* APP CENTRAL ROUTER DASHBOARD GRID LAYOUT */
         .dashboard-wrapper {
             animation: fadeIn 0.3s ease-in-out;
         }
@@ -138,7 +136,7 @@
         }
         .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
         }
         .tool-card {
@@ -175,7 +173,6 @@
             font-weight: 700;
         }
 
-        /* FULL SCREEN SECTION MANAGEMENT LAYOUT */
         .tool-section {
             background: var(--card-bg);
             border-radius: 16px;
@@ -209,7 +206,6 @@
             object-fit: contain;
         }
         
-        /* NAVIGATION ACTIONS BACK DASHBOARD LINKS */
         .back-dash-btn {
             background: #f1f5f9;
             color: #475569;
@@ -245,6 +241,9 @@
             color: var(--text-main);
             font-size: 0.85rem;
         }
+        .input-group shadow-input {
+            color: var(--text-muted);
+        }
         .input-wrapper {
             position: relative;
             display: flex;
@@ -273,6 +272,30 @@
             background-color: var(--card-bg);
             box-shadow: 0 0 0 3px rgba(146, 163, 225, 0.12);
         }
+
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+            background: #f8fafc;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px dashed #cbd5e1;
+        }
+        .toggle-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--brand-dark);
+            cursor: pointer;
+        }
+        .toggle-group label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-main);
+            cursor: pointer;
+            user-select: none;
+        }
         
         .results-panel {
             background: #f8fafc;
@@ -287,6 +310,7 @@
         .results-panel.eligibility-panel { border-left-color: #38a169; }
         .results-panel.price-panel { border-left-color: #805ad5; }
         .results-panel.converter-panel { border-left-color: #3182ce; }
+        .results-panel.roi-panel { border-left-color: #e53e3e; }
         
         .result-item {
             border-bottom: 1px dashed #e2e8f0;
@@ -311,6 +335,7 @@
         }
         .result-value.highlight { color: #3182ce; }
         .result-value.success { color: #38a169; }
+        .result-value.danger { color: #e53e3e; }
         
         .amortization-wrapper {
             margin-top: 30px;
@@ -399,7 +424,6 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
-        /* RESPONSIVE LAYOUT ENGINE FOR DASHBOARD GRID SETUP */
         @media (max-width: 868px) {
             .dashboard-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -440,17 +464,17 @@
 
     <div id="custom-splash-screen">
         <div class="splash-frame">
-            <img src="https://i.postimg.cc/5yQkgmKm/Real-Estate-Calculator-(2).gif" alt="Real Estate Core Engine Init">
+            <img src="https://i.postimg.cc/bwxHrNZB/Real-Estate-Calculator-(3).gif" alt="Real Estate Core Engine Init">
         </div>
     </div>
 
     <header>
         <div class="branding" onclick="exitToDashboard()" style="cursor: pointer;">
             <div class="logo-container">
-                <img src="https://cdn3d.iconscout.com/3d/premium/thumb/house-with-financial-calculator-3d-icon-png-download-14089504.png" alt="Real Estate Calculator Default Brand Asset Logo">
+                <img src="https://cdn3d.iconscout.com/3d/premium/thumb/house-with-financial-calculator-3d-icon-png-download-14089504.png" alt="Logo">
             </div>
             <h1 class="app-name-title">Real Estate Calculator</h1>
-            <div class="version-tag">v1.61</div>
+            <div class="version-tag">v1.64</div>
         </div>
     </header>
 
@@ -478,6 +502,11 @@
                 <div class="tool-card" onclick="launchTool('area-converter-sec')">
                     <img src="https://i.postimg.cc/Mpqdfxw1/image.png" alt="Converter">
                     <h3>Area Converter</h3>
+                </div>
+
+                <div class="tool-card" onclick="launchTool('roi-investment-sec')">
+                    <img src="https://i.postimg.cc/fLmwnF2y/image.png" alt="ROI Analysis">
+                    <h3>Return on Investment</h3>
                 </div>
 
             </div>
@@ -531,7 +560,7 @@
                 </div>
 
                 <div class="amortization-wrapper">
-                    <div class="amortization-title">Amortization Schedule Table (Loan Repayment Timeline)</div>
+                    <div class="amortization-title">Amortization Schedule Table</div>
                     <div class="table-responsive">
                         <table class="amort-table">
                             <thead>
@@ -545,7 +574,7 @@
                             </thead>
                             <tbody id="amortization-table-body">
                                 <tr>
-                                    <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 20px;">Provide valid loan parameters to populate timeline logs...</td>
+                                    <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 20px;">Provide valid loan parameters...</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -565,31 +594,31 @@
             <div class="calculator-grid">
                 <div class="calculator-inputs">
                     <div class="input-group">
-                        <label for="el-salary">Gross Monthly Income / Salary</label>
+                        <label for="el-salary">Gross Monthly Income</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">₹</span>
-                            <input type="text" id="el-salary" inputmode="decimal" placeholder="Enter gross monthly salary" oninput="handleCurrencyInput(this, calculateEligibility)">
+                            <input type="text" id="el-salary" inputmode="decimal" placeholder="Enter income" oninput="handleCurrencyInput(this, calculateEligibility)">
                         </div>
                     </div>
                     <div class="input-group">
                         <label for="el-age">Age of Applicant</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">Yo</span>
-                            <input type="number" step="any" id="el-age" inputmode="decimal" placeholder="Enter applicant age" min="18" max="70" oninput="calculateEligibility()">
+                            <input type="number" step="any" id="el-age" inputmode="decimal" placeholder="Enter age" min="18" max="70" oninput="calculateEligibility()">
                         </div>
                     </div>
                     <div class="input-group">
-                        <label for="el-obligations">Existing Monthly EMI Obligations</label>
+                        <label for="el-obligations">Existing Monthly EMIs</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">₹</span>
-                            <input type="text" id="el-obligations" inputmode="decimal" placeholder="Enter current EMIs if any" oninput="handleCurrencyInput(this, calculateEligibility)">
+                            <input type="text" id="el-obligations" inputmode="decimal" placeholder="Enter current EMIs" oninput="handleCurrencyInput(this, calculateEligibility)">
                         </div>
                     </div>
                     <div class="input-group">
                         <label for="el-interest">Expected Interest Rate (p.a.)</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">%</span>
-                            <input type="number" step="0.05" id="el-interest" inputmode="decimal" placeholder="Enter expected interest rate" oninput="calculateEligibility()">
+                            <input type="number" step="0.05" id="el-interest" inputmode="decimal" placeholder="Enter interest rate" oninput="calculateEligibility()">
                         </div>
                     </div>
                 </div>
@@ -603,7 +632,7 @@
                         <div class="result-value" id="render-el-foir">0%</div>
                     </div>
                     <div class="result-item">
-                        <div class="result-label">Max Affordable Monthly EMI Capability</div>
+                        <div class="result-label">Max Affordable Monthly EMI</div>
                         <div class="result-value" id="render-el-emi">₹ 0</div>
                     </div>
                     <div class="result-item">
@@ -653,6 +682,19 @@
                             <input type="text" id="ps-parking" inputmode="decimal" value="10,00,000" oninput="handleCurrencyInput(this, function(){ runPriceEngine('forward'); })">
                         </div>
                     </div>
+                    
+                    <div class="toggle-group">
+                        <input type="checkbox" id="ps-parking-tax-toggle" onchange="runPriceEngine('toggle-change')">
+                        <label for="ps-parking-tax-toggle">Add Car Parking in Agreement Value</label>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="ps-other-amt">Other Amount (Exempted from Stamp & GST)</label>
+                        <div class="input-wrapper">
+                            <span class="input-prefix">₹</span>
+                            <input type="text" id="ps-other-amt" inputmode="decimal" placeholder="Enter other amount" oninput="handleCurrencyInput(this, function(){ runPriceEngine('other-change'); })">
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="results-panel price-panel">
@@ -678,14 +720,14 @@
                             <span>₹ 50,000</span>
                         </div>
                         <div class="breakdown-row">
-                            <span>Other Charges:</span>
+                            <span>Development Charges:</span>
                             <span id="lbl-other">₹ 0</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="note-box">
-                *Dynamic Reverse Logic Engine: Editing the <strong>All-Inclusive Price</strong> or <strong>Agreement Value</strong> backward-extracts your dynamic base rates, maintaining constants: Registration (₹50k) and Development Outflows. Car Parking can be edited dynamically as needed.
+                *Dynamic Cost Engine: Toggling <strong>"Add Car Parking in Agreement"</strong> forces parking cost to blend into core taxable modules, impacting Stamp Duty & GST dynamically. <strong>Other Amount</strong> operates on a mutual scale with core agreement pools under backwards processing cycles.
             </div>
         </section>
 
@@ -703,14 +745,14 @@
                         <label>Square Feet (Sq. Ft.)</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">Ft²</span>
-                            <input type="number" step="any" id="conv-sqft" inputmode="decimal" placeholder="Enter Square Feet" oninput="convertAreaUnits('sqft')">
+                            <input type="number" step="any" id="conv-sqft" inputmode="decimal" placeholder="Enter Sq. Ft." oninput="convertAreaUnits('sqft')">
                         </div>
                     </div>
                     <div class="input-group">
                         <label>Square Meters (Sq. M.)</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">M²</span>
-                            <input type="number" step="any" id="conv-sqm" inputmode="decimal" placeholder="Enter Square Meters" oninput="convertAreaUnits('sqm')">
+                            <input type="number" step="any" id="conv-sqm" inputmode="decimal" placeholder="Enter Sq. M." oninput="convertAreaUnits('sqm')">
                         </div>
                     </div>
                     <div class="input-group">
@@ -728,7 +770,7 @@
                         </div>
                     </div>
                     <div class="input-group">
-                        <label>Bighas (Standard)</label>
+                        <label>Bighas</label>
                         <div class="input-wrapper">
                             <span class="input-prefix">Bh</span>
                             <input type="number" step="any" id="conv-bigha" inputmode="decimal" placeholder="Enter Bighas" oninput="convertAreaUnits('bigha')">
@@ -745,13 +787,60 @@
                 
                 <div class="results-panel converter-panel">
                     <div class="result-item">
-                        <div class="result-label">Standard Conversion Core Constants</div>
+                        <div class="result-label">Standard Conversion Constants</div>
                         <div style="font-size: 0.88rem; color: var(--text-main); margin-top: 5px; line-height: 1.7;">
-                            • 1 Square Meter = <strong>10.7639 Sq. Ft.</strong><br>
-                            • 1 Guntha = <strong>1,089 Sq. Ft.</strong> (40 Guntas = 1 Acre)<br>
-                            • 1 Acre = <strong>43,560 Sq. Ft.</strong><br>
-                            • 1 Bigha (Std) = <strong>27,000 Sq. Ft.</strong><br>
-                            • 1 Hectare = <strong>1,07,639 Sq. Ft.</strong> (2.471 Acres)
+                            • 1 Sq. M. = 10.7639 Sq. Ft.<br>
+                            • 1 Guntha = 1,089 Sq. Ft.<br>
+                            • 1 Acre = 43,560 Sq. Ft.<br>
+                            • 1 Bigha = 27,000 Sq. Ft.<br>
+                            • 1 Hectare = 1,07,639 Sq. Ft.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="roi-investment-sec" class="tool-section">
+            <div class="section-title">
+                <div class="title-left-block">
+                    <img src="https://i.postimg.cc/fLmwnF2y/image.png" alt="">
+                    <h2>Return on Investment (ROI)</h2>
+                </div>
+                <button class="back-dash-btn" onclick="exitToDashboard()">← Back</button>
+            </div>
+            <div class="calculator-grid">
+                <div class="calculator-inputs">
+                    <div class="input-group">
+                        <label for="roi-prop-value">Property Value</label>
+                        <div class="input-wrapper">
+                            <span class="input-prefix">₹</span>
+                            <input type="text" id="roi-prop-value" inputmode="decimal" placeholder="Enter asset value" oninput="handleCurrencyInput(this, calculateROIEngine)">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="roi-monthly-rent">Monthly Rental Income</label>
+                        <div class="input-wrapper">
+                            <span class="input-prefix">₹</span>
+                            <input type="text" id="roi-monthly-rent" inputmode="decimal" placeholder="Enter monthly rent" oninput="handleCurrencyInput(this, function(){ runRentalBilateralEngine('monthly'); })">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="roi-annual-rent">Annual Rental Income</label>
+                        <div class="input-wrapper">
+                            <span class="input-prefix">₹</span>
+                            <input type="text" id="roi-annual-rent" inputmode="decimal" placeholder="Enter annual rent" oninput="handleCurrencyInput(this, function(){ runRentalBilateralEngine('annual'); })">
+                        </div>
+                    </div>
+                </div>
+                <div class="results-panel roi-panel">
+                    <div class="result-item">
+                        <div class="result-label">Gross Capital Return Yield Rate</div>
+                        <div class="result-value danger" id="render-roi-percentage">0.00 %</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Investment Efficiency Assessment</div>
+                        <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; margin-top:4px;">
+                            Yield metrics describe annual cash inflows divided against deployment values. Commercial parameters leverage 6-9%, residential stays within 2.5-4.5%.
                         </div>
                     </div>
                 </div>
@@ -761,10 +850,8 @@
     </div>
 
     <script>
-        // STRICT RANDOM TIMEOUT OVERLAY SYSTEM DISPLAY CONTROLLER FOR LOADER GIF
         window.addEventListener('DOMContentLoaded', () => {
             const randomSplashDuration = Math.floor(Math.random() * (3000 - 2000 + 1)) + 2000;
-            
             setTimeout(() => {
                 const splash = document.getElementById('custom-splash-screen');
                 if (splash) {
@@ -775,30 +862,24 @@
             }, randomSplashDuration);
         });
 
-        // App Interaction Security Guards
         document.addEventListener('wheel', function(e) { if (e.ctrlKey) e.preventDefault(); }, { passive: false });
         document.addEventListener('keydown', function(e) {
             if (e.ctrlKey && (e.key === '=' || e.key === '-' || e.key === '+' || e.key === '_')) e.preventDefault();
         });
 
-        // CENTRAL DASHBOARD DYNAMIC MANAGER
         function launchTool(toolId) {
             document.getElementById('main-app-dashboard').style.display = 'none';
             document.querySelectorAll('.tool-section').forEach(sec => sec.style.display = 'none');
-            
-            const targetSection = document.getElementById(toolId);
-            targetSection.style.display = 'block';
+            document.getElementById(toolId).style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function exitToDashboard() {
             document.querySelectorAll('.tool-section').forEach(sec => sec.style.display = 'none');
-            document.getElementById('main-app-dashboard').style.block = 'block';
             document.getElementById('main-app-dashboard').style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // MATRIX AREA CONVERTER ALGORITHM BLOCK
         function convertAreaUnits(originUnit) {
             const fields = {
                 sqft: document.getElementById('conv-sqft'),
@@ -813,9 +894,7 @@
             let currentVal = parseFloat(fields[originUnit].value) || 0;
 
             if (currentVal === 0) {
-                for (let key in fields) {
-                    if (key !== originUnit) fields[key].value = "";
-                }
+                for (let key in fields) { if (key !== originUnit) fields[key].value = ""; }
                 return;
             }
 
@@ -843,30 +922,21 @@
 
         function formatIndianCurrency(num) {
             if (isNaN(num) || num === null || num === 0) return "0";
-            
             let parts = num.toString().split('.');
             let integerPart = Math.round(parseFloat(parts[0])).toString();
             let decimalPart = parts[1] ? '.' + parts[1].substring(0, 2) : '';
-            
             let lastThree = integerPart.substring(integerPart.length - 3);
             let otherBits = integerPart.substring(0, integerPart.length - 3);
             if (otherBits !== '') lastThree = ',' + lastThree;
-            
             return otherBits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree + decimalPart;
         }
 
         function handleCurrencyInput(inputElement, callback) {
             let selectionStart = inputElement.selectionStart;
             let oldLength = inputElement.value.length;
-            
-            // Allow numbers and full-stops only
             let pureNum = inputElement.value.replace(/[^0-9.]/g, '');
-            
-            // Erase duplicate full stops if entered
             let points = pureNum.split('.');
-            if (points.length > 2) {
-                pureNum = points[0] + '.' + points.slice(1).join('');
-            }
+            if (points.length > 2) pureNum = points[0] + '.' + points.slice(1).join('');
             
             if (pureNum === "") {
                 inputElement.value = "";
@@ -882,7 +952,7 @@
                 let floatVal = parseFloat(pureNum) || 0;
                 if (pureNum.includes('.')) {
                     let decimals = pureNum.split('.')[1];
-                    let intPart = parseInt(pureNum.split('_')[0] || pureNum.split('.')[0], 10) || 0;
+                    let intPart = parseInt(pureNum.split('.')[0], 10) || 0;
                     formatted = formatIndianCurrency(intPart) + '.' + decimals;
                 } else {
                     formatted = formatIndianCurrency(floatVal);
@@ -890,7 +960,6 @@
             }
             
             inputElement.value = formatted;
-            
             let newLength = formatted.length;
             selectionStart = selectionStart + (newLength - oldLength);
             inputElement.setSelectionRange(selectionStart, selectionStart);
@@ -898,7 +967,6 @@
             if(callback) callback();
         }
 
-        // EMI CALCULATION CORE ENGINE
         function calculateEMI() {
             let principal = getPureNumber(document.getElementById('emi-amount').value);
             let interestRate = parseFloat(document.getElementById('emi-interest').value) || 0;
@@ -909,20 +977,15 @@
                 document.getElementById('render-emi').innerText = "₹ 0";
                 document.getElementById('render-total-interest').innerText = "₹ 0";
                 document.getElementById('render-total-amount').innerText = "₹ 0";
-                tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 20px;">Provide valid loan parameters to populate timeline logs...</td></tr>`;
+                tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 20px;">Provide valid loan parameters...</td></tr>`;
                 return;
             }
 
             let monthlyInterestRate = (interestRate / 100) / 12;
             let totalMonths = tenureYears * 12;
-
-            let monthlyEmi = 0;
-            if (interestRate > 0) {
-                monthlyEmi = (principal * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, totalMonths)) / 
-                             (Math.pow(1 + monthlyInterestRate, totalMonths) - 1);
-            } else {
-                monthlyEmi = principal / totalMonths;
-            }
+            let monthlyEmi = interestRate > 0 ? 
+                (principal * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, totalMonths)) / (Math.pow(1 + monthlyInterestRate, totalMonths) - 1) : 
+                principal / totalMonths;
 
             let totalAmountPayable = monthlyEmi * totalMonths;
             let totalInterestPayable = totalAmountPayable - principal;
@@ -950,33 +1013,18 @@
                     cumulativeYearlyInterestPaid += calculatedInterestComponent;
                     cumulativeYearlyPrincipalPaid += calculatedPrincipalComponent;
                     currentOpeningBalance -= calculatedPrincipalComponent;
-                    
-                    if(currentOpeningBalance <= 0) {
-                        currentOpeningBalance = 0;
-                        break;
-                    }
+                    if(currentOpeningBalance <= 0) { currentOpeningBalance = 0; break; }
                 }
 
                 let currentClosingBalance = currentOpeningBalance;
                 let runningOpeningBalanceDisplay = currentClosingBalance + cumulativeYearlyPrincipalPaid;
 
-                tableHTMLBuffer += `
-                    <tr>
-                        <td><strong>Year ${currentYear}</strong></td>
-                        <td>₹ ${formatIndianCurrency(runningOpeningBalanceDisplay)}</td>
-                        <td>₹ ${formatIndianCurrency(cumulativeYearlyInterestPaid)}</td>
-                        <td>₹ ${formatIndianCurrency(cumulativeYearlyPrincipalPaid)}</td>
-                        <td><strong>₹ ${formatIndianCurrency(currentClosingBalance)}</strong></td>
-                    </tr>
-                `;
-
+                tableHTMLBuffer += `<tr><td><strong>Year ${currentYear}</strong></td><td>₹ ${formatIndianCurrency(runningOpeningBalanceDisplay)}</td><td>₹ ${formatIndianCurrency(cumulativeYearlyInterestPaid)}</td><td>₹ ${formatIndianCurrency(cumulativeYearlyPrincipalPaid)}</td><td><strong>₹ ${formatIndianCurrency(currentClosingBalance)}</strong></td></tr>`;
                 if(currentClosingBalance <= 0) break;
             }
-
             tableBody.innerHTML = tableHTMLBuffer;
         }
 
-        // BANK FOIR BASED ELIGIBILITY CALCULATION ENGINE
         function calculateEligibility() {
             let grossSalary = getPureNumber(document.getElementById('el-salary').value);
             let age = parseInt(document.getElementById('el-age').value) || 0;
@@ -991,19 +1039,9 @@
                 return;
             }
 
-            let maxTenureYears = 60 - age;
-            if (maxTenureYears > 30) maxTenureYears = 30; 
-            if (maxTenureYears < 0) maxTenureYears = 0;
-
-            let foir = 0.40;
-            if (grossSalary >= 50000 && grossSalary < 100000) {
-                foir = 0.50;
-            } else if (grossSalary >= 100000) {
-                foir = 0.60;
-            }
-
-            let totalAffordableEmiAmount = (grossSalary * foir) - obligations;
-            if (totalAffordableEmiAmount < 0) totalAffordableEmiAmount = 0;
+            let maxTenureYears = Math.min(30, Math.max(0, 60 - age));
+            let foir = grossSalary >= 100000 ? 0.60 : (grossSalary >= 50000 ? 0.50 : 0.40);
+            let totalAffordableEmiAmount = Math.max(0, (grossSalary * foir) - obligations);
 
             let eligibleLoan = 0;
             if (totalAffordableEmiAmount > 0 && expectedInterest > 0 && maxTenureYears > 0) {
@@ -1018,34 +1056,53 @@
             document.getElementById('render-el-loan').innerText = "₹ " + formatIndianCurrency(eligibleLoan);
         }
 
-        // TWO-WAY DYNAMIC PRICING ENGINE
+        // UPGRADED PRODUCTION COST ENGINE v1.64 (MUTUAL SWING RE-CALIBRATED)
         function runPriceEngine(direction) {
             let carpet = parseFloat(document.getElementById('ps-carpet').value) || 0;
             let parking = getPureNumber(document.getElementById('ps-parking').value);
+            let otherAmount = getPureNumber(document.getElementById('ps-other-amt').value);
             let registration = 50000;
             let otherCharges = carpet * 1180; 
+            let isParkingInAgreement = document.getElementById('ps-parking-tax-toggle').checked;
 
             if (carpet === 0 && direction !== 'backward') {
                 document.getElementById('lbl-stamp').innerText = "₹ 0";
                 document.getElementById('lbl-gst').innerText = "₹ 0";
                 document.getElementById('lbl-other').innerText = "₹ 0";
+                document.getElementById('ps-allin').value = "";
                 return;
             }
 
             if (direction === 'forward') {
                 let rate = getPureNumber(document.getElementById('ps-rate').value);
-                let agreementValue = carpet * rate;
+                let baseFlatCost = carpet * rate;
                 
-                document.getElementById('ps-agreement').value = agreementValue > 0 ? formatIndianCurrency(agreementValue) : "";
-                executeTaxAndAllInCalculations(agreementValue, otherCharges, registration, parking);
+                // FIXED MUTUAL REDUCTION: Other Amount gets directly minus from Agreement Value
+                let derivedAgreement = isParkingInAgreement ? (baseFlatCost + parking - otherAmount) : (baseFlatCost - otherAmount);
+                if (derivedAgreement < 0) derivedAgreement = 0;
+
+                document.getElementById('ps-agreement').value = derivedAgreement > 0 ? formatIndianCurrency(derivedAgreement) : "";
+                executeCalculations(derivedAgreement, otherCharges, registration, parking, otherAmount, isParkingInAgreement);
             } 
+            else if (direction === 'other-change') {
+                // If user modifies Other Amount directly, re-run forward logic to calculate correct agreement subtraction
+                runPriceEngine('forward');
+            }
             else if (direction === 'agreement-change') {
-                let agreementValue = getPureNumber(document.getElementById('ps-agreement').value);
-                let rate = carpet > 0 ? (agreementValue / carpet) : 0;
+                let displayAgreementValue = getPureNumber(document.getElementById('ps-agreement').value);
                 
+                // Back-calculate the base flat cost considering layout switches
+                let baseFlatCost = isParkingInAgreement ? (displayAgreementValue - parking + otherAmount) : (displayAgreementValue + otherAmount);
+                if (baseFlatCost < 0) baseFlatCost = 0;
+                
+                let rate = carpet > 0 ? (baseFlatCost / carpet) : 0;
                 document.getElementById('ps-rate').value = rate > 0 ? formatIndianCurrency(rate) : "";
-                executeTaxAndAllInCalculations(agreementValue, otherCharges, registration, parking);
+                
+                executeCalculations(displayAgreementValue, otherCharges, registration, parking, otherAmount, isParkingInAgreement);
             } 
+            else if (direction === 'toggle-change') {
+                runPriceEngine('forward');
+            }
             else if (direction === 'backward') {
                 let targetAllIn = getPureNumber(document.getElementById('ps-allin').value);
                 if (targetAllIn === 0) {
@@ -1057,31 +1114,75 @@
                     return;
                 }
                 
-                let netTaxablePool = targetAllIn - registration - otherCharges - parking;
-                let derivedAgreement = netTaxablePool > 0 ? (netTaxablePool / 1.11) : 0;
-                let derivedRate = (derivedAgreement > 0 && carpet > 0) ? (derivedAgreement / carpet) : 0;
+                let displayAgreementValue = 0;
 
-                document.getElementById('ps-agreement').value = derivedAgreement > 0 ? formatIndianCurrency(derivedAgreement) : "";
-                document.getElementById('ps-rate').value = derivedRate > 0 ? formatIndianCurrency(derivedRate) : "";
+                if (isParkingInAgreement) {
+                    let totalTaxablePool = targetAllIn - registration - otherCharges - otherAmount;
+                    displayAgreementValue = totalTaxablePool > 0 ? (totalTaxablePool / 1.11) : 0;
+                    
+                    let baseFlatCost = displayAgreementValue - parking + otherAmount;
+                    if (baseFlatCost < 0) baseFlatCost = 0;
+                    let derivedRate = carpet > 0 ? (baseFlatCost / carpet) : 0;
+                    
+                    document.getElementById('ps-agreement').value = displayAgreementValue > 0 ? formatIndianCurrency(displayAgreementValue) : "";
+                    document.getElementById('ps-rate').value = derivedRate > 0 ? formatIndianCurrency(derivedRate) : "";
+                } else {
+                    let totalTaxablePool = targetAllIn - registration - otherCharges - parking - otherAmount;
+                    displayAgreementValue = totalTaxablePool > 0 ? (totalTaxablePool / 1.11) : 0;
+                    
+                    let baseFlatCost = displayAgreementValue + otherAmount;
+                    let derivedRate = carpet > 0 ? (baseFlatCost / carpet) : 0;
+                    
+                    document.getElementById('ps-agreement').value = displayAgreementValue > 0 ? formatIndianCurrency(displayAgreementValue) : "";
+                    document.getElementById('ps-rate').value = derivedRate > 0 ? formatIndianCurrency(derivedRate) : "";
+                }
 
-                let stampDuty = derivedAgreement * 0.06;
-                let gst = derivedAgreement * 0.05;
+                let stampDuty = displayAgreementValue * 0.06;
+                let gst = displayAgreementValue * 0.05;
 
-                document.getElementById('lbl-stamp').innerText = "₹ " + formatIndianCurrency(stampDuty);
-                document.getElementById('lbl-gst').innerText = "₹ " + formatIndianCurrency(gst);
+                document.getElementById('lbl-stamp').innerText = "₹ " + formatIndianCurrency(stampDuty > 0 ? stampDuty : 0);
+                document.getElementById('lbl-gst').innerText = "₹ " + formatIndianCurrency(gst > 0 ? gst : 0);
                 document.getElementById('lbl-other').innerText = "₹ " + formatIndianCurrency(otherCharges);
             }
         }
 
-        function executeTaxAndAllInCalculations(agreement, other, reg, park) {
-            let stampDuty = agreement * 0.06;
-            let gst = agreement * 0.05;
-            let totalAllIn = agreement + stampDuty + gst + reg + other + park;
+        function executeCalculations(taxableAgreementValue, other, reg, park, otherAmt, isParkingInAgreement) {
+            let stampDuty = taxableAgreementValue * 0.06;
+            let gst = taxableAgreementValue * 0.05;
+            
+            // Unchecked parking bypasses tax multiplier entirely and goes straight to All-In pool
+            let totalAllIn = taxableAgreementValue + stampDuty + gst + reg + other + otherAmt + (isParkingInAgreement ? 0 : park);
 
             document.getElementById('lbl-stamp').innerText = "₹ " + formatIndianCurrency(stampDuty);
             document.getElementById('lbl-gst').innerText = "₹ " + formatIndianCurrency(gst);
             document.getElementById('lbl-other').innerText = "₹ " + formatIndianCurrency(other);
             document.getElementById('ps-allin').value = totalAllIn > 0 ? formatIndianCurrency(totalAllIn) : "";
+        }
+
+        function runRentalBilateralEngine(triggerSource) {
+            let monthlyRentField = document.getElementById('roi-monthly-rent');
+            let annualRentField = document.getElementById('roi-annual-rent');
+
+            if (triggerSource === 'monthly') {
+                let monthlyRent = getPureNumber(monthlyRentField.value);
+                annualRentField.value = monthlyRent === 0 ? "" : formatIndianCurrency(monthlyRent * 12);
+            } else if (triggerSource === 'annual') {
+                let annualRent = getPureNumber(annualRentField.value);
+                monthlyRentField.value = annualRent === 0 ? "" : formatIndianCurrency(annualRent / 12);
+            }
+            calculateROIEngine();
+        }
+
+        function calculateROIEngine() {
+            let propertyValue = getPureNumber(document.getElementById('roi-prop-value').value);
+            let annualRent = getPureNumber(document.getElementById('roi-annual-rent').value);
+            let roiDisplay = document.getElementById('render-roi-percentage');
+
+            if (propertyValue === 0 || annualRent === 0) {
+                roiDisplay.innerText = "0.00 %";
+                return;
+            }
+            roiDisplay.innerText = ((annualRent / propertyValue) * 100).toFixed(2) + " %";
         }
 
         if ('serviceWorker' in navigator) {
@@ -1093,7 +1194,7 @@
                 `;
                 const blob = new Blob([swCode], { type: 'application/javascript' });
                 const workerUrl = URL.createObjectURL(blob);
-                navigator.serviceWorker.register(workerUrl).catch(err => console.log('PWA execution ignored'));
+                navigator.serviceWorker.register(workerUrl).catch(err => console.log('PWA execution error'));
             });
         }
     </script>
