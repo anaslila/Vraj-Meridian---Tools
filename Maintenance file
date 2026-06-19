@@ -2,164 +2,112 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>System Maintenance | Real Estate Calculation Suite</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Website Under Maintenance</title>
     <style>
-        :root {
-            --brand-primary: #92a3e1;
-            --brand-dark: #4a557a;
-            --bg-surface: #f8fafc;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --border-color: #e2e8f0;
-        }
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
         }
 
         body {
-            background-color: var(--bg-surface);
-            color: var(--text-main);
+            background-color: #faf7f2;
+            color: #1e293b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 24px;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .maintenance-card {
-            background: #ffffff;
-            padding: 50px 40px;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(146, 163, 225, 0.1);
-            max-width: 500px;
-            width: 100%;
-            border: 1px solid var(--border-color);
+            width: 100vw;
+            overflow: hidden;
             text-align: center;
-            animation: cardReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 20px;
         }
 
-        .brand-header {
+        .maintenance-container {
+            max-width: 450px;
             display: flex;
+            flex-direction: column;
             align-items: center;
+            gap: 20px;
+        }
+
+        .gif-wrapper {
+            width: 180px;
+            height: 180px;
+            display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 35px;
+            align-items: center;
+            overflow: hidden;
+            background: transparent;
         }
 
-        .brand-logo {
-            height: 28px;
-            width: auto;
-        }
-
-        .brand-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-main);
-            letter-spacing: -0.02em;
-        }
-
-        .visual-container {
+        .gif-wrapper img {
             width: 100%;
-            max-width: 220px;
-            margin: 0 auto 30px auto;
-            position: relative;
-        }
-
-        .visual-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-            mix-blend-mode: multiply;
+            height: 100%;
+            object-fit: contain;
+            border: none;
+            outline: none;
+            mix-blend-mode: multiply; /* Ensures it blends beautifully with your custom background */
         }
 
         h1 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 12px;
+            color: #1e293b;
             letter-spacing: -0.02em;
+            line-height: 1.2;
         }
 
         p {
-            font-size: 0.92rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 30px;
+            font-size: 0.95rem;
+            color: #64748b;
+            font-weight: 500;
+            line-height: 1.5;
             padding: 0 10px;
         }
 
-        .system-status-box {
-            background-color: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 14px 20px;
+        .loader-dots {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 0.82rem;
+            gap: 6px;
+            margin-top: 5px;
         }
 
-        .status-left {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 600;
-            color: var(--brand-dark);
-        }
-
-        .pulse-indicator {
+        .dot {
             width: 8px;
             height: 8px;
-            background-color: #38a169;
+            background-color: #92a3e1;
             border-radius: 50%;
-            box-shadow: 0 0 0 0 rgba(56, 161, 105, 0.4);
-            animation: pulse 2s infinite;
+            animation: bounce 1.4s infinite ease-in-out both;
         }
 
-        .status-eta {
-            color: var(--text-muted);
-            font-weight: 500;
-        }
+        .dot:nth-child(1) { animation-delay: -0.32s; }
+        .dot:nth-child(2) { animation-delay: -0.16s; }
 
-        @keyframes cardReveal {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(56, 161, 105, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(56, 161, 105, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(56, 161, 105, 0); }
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1.0); }
         }
     </style>
 </head>
 <body>
 
-    <div class="maintenance-card">
-        <div class="brand-header">
-            <img class="brand-logo" src="https://cdn3d.iconscout.com/3d/premium/thumb/house-with-financial-calculator-3d-icon-png-download-14089504.png" alt="Suite Logo">
-            <span class="brand-title">Real Estate Calculation Suite</span>
-        </div>
-
-        <div class="visual-container">
-            <img src="https://i.postimg.cc/Y281QC4f/04489f0a-1168-11ee-acde-3f59cc25c37d.gif" alt="System Maintenance Animation">
+    <div class="maintenance-container">
+        <div class="gif-wrapper">
+            <img src="https://cdn.pixabay.com/animation/2022/12/05/15/28/15-28-43-29_512.gif" alt="Maintenance Executing">
         </div>
         
-        <h1>We'll Be Back Shortly</h1>
-        <p>We’re currently enhancing our calculation systems and platform performance to deliver a smoother experience.</p>
+        <h1>System Upgrades In Progress</h1>
+        <p>We are fine tuning the calculation engines to give you an even faster experience. We'll be back online shortly!</p>
         
-        <div class="system-status-box">
-            <div class="status-left">
-                <div class="pulse-indicator"></div>
-                <span>Scheduled Upgrades</span>
-            </div>
-            <div class="status-eta">ETA: 2-3 Days</div>
+        <div class="loader-dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
         </div>
     </div>
 
