@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Real Estate Calculator - v1.63</title>
+    <title>Real Estate Calculator - v1.65</title>
     
     <meta name="theme-color" content="#92a3e1">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,14 +13,14 @@
     <link rel="icon" type="image/png" href="https://cdn3d.iconscout.com/3d/premium/thumb/house-with-financial-calculator-3d-icon-png-download-14089504.png">
     <link rel="apple-touch-icon" href="https://cdn3d.iconscout.com/3d/premium/thumb/house-with-financial-calculator-3d-icon-png-download-14089504.png">
     
-    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlJlYWwgRXN0YXRlIENhbGN1bGF0b3IiLAogICJzaG9ydF9uYW1lIjogIlJFIENhbGMiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2Y0ZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiM5MmEzZTEiLAogICJuZXdfdmVyc2lvbiI6ICIxLjY0IiwKICAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImh0dHBzOi8vY2RuM2QuaWNvbnNjb3V0LmNvbS8zZC9wcmVtaXVtL3RodW1iL2hvdXNlLXdpdGgtZmluYW5jaWFsLWNhbGN1bGF0b3RefmNkbi1kb3dubG9hZC0xNDA4OTUwNC5wbmciLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIsCiAgICAgICJwdXJwb3NlIjogImFueSBtYXNrYWJsZSIKICAgIH0KICBfCn0=">
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlJlYWwgRXN0YXRlIENhbGN1bGF0b3IiLAogICJzaG9ydF9uYW1lIjogIlJFIENhbGMiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2Y0ZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiM5MmEzZTEiLAogICJuZXdfdmVyc2lvbiI6ICIxLjY1IiwKICAgImljb25zIgwKICAgIHsKICAgICAgInNyYyI6ICJodHRwczovL2NkbjNkLmljb25zY291dC5jb20vM2QvcHJlbWl1bS90aHVtYi9ob3VzZS13aXRoLWZpbmFuY2lhbC1jYWxjdWxhdG9yfmNkbi1kb3dubG9hZC0xNDA4OTUwNC5wbmciLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3BuZyIsCiAgICAgICJwdXJwb3NlIjogImFueSBtYXMaskYWJsZSIKICAgIH0KICBfCn0=">
 
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
             -webkit-touch-callout: none;
             -webkit-user-select: none;
             user-select: none;
@@ -33,18 +33,20 @@
         
         :root {
             --brand-color: #92a3e1;
-            --brand-dark: #6d7fbf;
+            --brand-dark: #5b6ca8;
             --brand-light: #f0f3ff;
-            --bg-main: #f5f7fb;
+            --bg-main: #f4f6fa;
             --card-bg: #ffffff;
             --text-main: #1e293b;
-            --text-muted: #64748b;
+            --text-muted: #475569;
+            --excel-border: #cbd5e1;
+            --excel-focus: #4f46e5;
         }
 
         body {
             background-color: var(--bg-main);
             color: var(--text-main);
-            line-height: 1.5;
+            line-height: 1.4;
             overflow-x: hidden;
             touch-action: pan-x pan-y;
         }
@@ -60,7 +62,7 @@
             justify-content: center;
             align-items: center;
             z-index: 999999;
-            transition: opacity 0.4s ease, visibility 0.4s ease;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
             opacity: 1;
             visibility: visible;
         }
@@ -83,336 +85,353 @@
         
         header {
             background-color: var(--card-bg);
-            box-shadow: 0 4px 20px rgba(146, 163, 225, 0.08);
-            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(146, 163, 225, 0.15);
+            border-bottom: 1px solid var(--excel-border);
         }
         .branding {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
         .logo-container img {
-            height: 38px;
+            height: 32px;
             width: auto;
             display: block;
         }
         .app-name-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--text-main);
+            letter-spacing: -0.02em;
         }
         .version-tag {
             background-color: var(--brand-light);
             color: var(--brand-dark);
-            padding: 2px 8px;
-            border-radius: 20px;
-            font-size: 0.72rem;
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-size: 0.7rem;
             font-weight: 700;
-            border: 1px solid rgba(146, 163, 225, 0.3);
+            border: 1px solid var(--brand-color);
         }
 
         .container {
-            max-width: 1140px;
-            margin: 20px auto;
-            padding: 0 15px;
+            max-width: 1000px;
+            margin: 15px auto;
+            padding: 0 12px;
         }
 
         .dashboard-wrapper {
-            animation: fadeIn 0.3s ease-in-out;
+            animation: fadeIn 0.25s ease-in-out;
         }
         .dashboard-heading {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--text-muted);
-            margin-bottom: 15px;
-            font-weight: 600;
-            padding-left: 2px;
+            margin-bottom: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
         }
         .dashboard-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 12px;
         }
         .tool-card {
             background: var(--card-bg);
-            border: 1.5px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 25px 20px;
+            border: 1px solid var(--excel-border);
+            border-radius: 8px;
+            padding: 20px 15px;
             cursor: pointer;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            gap: 15px;
-            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.01);
+            gap: 10px;
+            transition: all 0.2s;
         }
         .tool-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--brand-color);
-            box-shadow: 0 10px 20px rgba(146, 163, 225, 0.1);
-        }
-        .tool-card:active {
-            transform: scale(0.98);
+            border-color: var(--excel-focus);
+            background-color: var(--brand-light);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
         .tool-card img {
-            width: 56px;
-            height: 56px;
+            width: 44px;
+            height: 44px;
             object-fit: contain;
         }
         .tool-card h3 {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: var(--text-main);
             font-weight: 700;
         }
 
         .tool-section {
             background: var(--card-bg);
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.03);
-            margin-bottom: 25px;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            margin-bottom: 20px;
             display: none;
-            border: 1px solid #edf2f7;
-            animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid var(--excel-border);
+            animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         
         .section-title {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             color: var(--text-main);
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 2px solid #f1f5f9;
-            padding-bottom: 12px;
+            border-bottom: 1px solid var(--excel-border);
+            padding-bottom: 8px;
             font-weight: 700;
         }
         .title-left-block {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
+            
         }
         .section-title img {
-            width: 32px;
-            height: 32px;
+            width: 24px;
+            height: 24px;
             object-fit: contain;
         }
         
         .back-dash-btn {
-            background: #f1f5f9;
-            color: #475569;
-            border: none;
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 0.82rem;
+            background: #e2e8f0;
+            color: #334155;
+            border: 1px solid var(--excel-border);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.78rem;
             font-weight: 700;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s;
+            transition: all 0.15s;
         }
         .back-dash-btn:hover {
-            background: var(--brand-light);
-            color: var(--brand-dark);
+            background: var(--brand-dark);
+            color: #fff;
         }
 
         .calculator-grid {
             display: grid;
             grid-template-columns: 1.1fr 0.9fr;
-            gap: 30px;
+            gap: 20px;
+        }
+
+        .excel-sheet-container {
+            border: 1px solid var(--excel-border);
+            background-color: #f8fafc;
+            border-radius: 6px;
+            overflow: hidden;
         }
         
-        .input-group {
-            margin-bottom: 15px;
+        .excel-row {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--excel-border);
+            background: #ffffff;
         }
-        .input-group label {
-            display: block;
+        .excel-row:last-child {
+            border-bottom: none;
+        }
+        .excel-row:nth-child(even) {
+            background-color: #fdfefe;
+        }
+        
+        .excel-label {
+            flex: 0 0 45%;
+            padding: 8px 12px;
+            font-size: 0.82rem;
             font-weight: 600;
-            margin-bottom: 6px;
-            color: var(--text-main);
-            font-size: 0.85rem;
+            color: #334155;
+            background-color: #f1f5f9;
+            border-right: 1px solid var(--excel-border);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
-        .input-group shadow-input {
-            color: var(--text-muted);
-        }
-        .input-wrapper {
+        
+        .excel-value-cell {
+            flex: 0 0 55%;
             position: relative;
             display: flex;
             align-items: center;
+            background: #fff;
         }
-        .input-prefix {
+        
+        .excel-prefix {
             position: absolute;
-            left: 12px;
-            color: var(--text-muted);
-            font-weight: 600;
-            font-size: 0.9rem;
+            left: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #64748b;
+            pointer-events: none;
         }
-        .input-wrapper input {
+        
+        .excel-value-cell input[type="text"],
+        .excel-value-cell input[type="number"] {
             width: 100%;
-            padding: 10px 12px 10px 36px;
-            border: 1.5px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            transition: all 0.2s;
-            color: var(--text-main);
-            background-color: #f8fafc;
-        }
-        .input-wrapper input:focus {
+            border: none;
             outline: none;
-            border-color: var(--brand-color);
-            background-color: var(--card-bg);
-            box-shadow: 0 0 0 3px rgba(146, 163, 225, 0.12);
+            padding: 8px 8px 8px 24px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-main);
+            text-align: right;
+            background: transparent;
         }
-
-        .toggle-group {
+        
+        .excel-value-cell input:focus {
+            background-color: #fffbeb;
+            box-shadow: inset 0 0 0 1px var(--excel-focus);
+        }
+        
+        .excel-toggle-row {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin: 15px 0;
+            padding: 6px 12px;
             background: #f8fafc;
-            padding: 10px 14px;
-            border-radius: 8px;
-            border: 1px dashed #cbd5e1;
+            border-bottom: 1px solid var(--excel-border);
         }
-        .toggle-group input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--brand-dark);
+        .excel-toggle-row input[type="checkbox"] {
+            width: 15px;
+            height: 15px;
+            accent-color: var(--excel-focus);
             cursor: pointer;
+            margin-right: 8px;
         }
-        .toggle-group label {
-            font-size: 0.85rem;
+        .excel-toggle-row label {
+            font-size: 0.78rem;
             font-weight: 700;
-            color: var(--text-main);
+            color: #1e293b;
             cursor: pointer;
-            user-select: none;
         }
-        
+
         .results-panel {
             background: #f8fafc;
-            border-radius: 12px;
-            padding: 20px;
-            border-left: 5px solid var(--brand-color);
+            border-radius: 6px;
+            padding: 15px;
+            border: 1px solid var(--excel-border);
+            border-top: 4px solid var(--brand-color);
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            gap: 15px;
+            gap: 10px;
         }
-        .results-panel.eligibility-panel { border-left-color: #38a169; }
-        .results-panel.price-panel { border-left-color: #805ad5; }
-        .results-panel.converter-panel { border-left-color: #3182ce; }
-        .results-panel.roi-panel { border-left-color: #e53e3e; }
+        .results-panel.eligibility-panel { border-top-color: #16a34a; }
+        .results-panel.price-panel { border-top-color: #4f46e5; }
+        .results-panel.converter-panel { border-top-color: #2563eb; }
+        .results-panel.roi-panel { border-top-color: #dc2626; }
         
         .result-item {
-            border-bottom: 1px dashed #e2e8f0;
-            padding-bottom: 10px;
+            border-bottom: 1px dashed var(--excel-border);
+            padding-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .result-item:last-child {
             border-bottom: none;
             padding-bottom: 0;
         }
         .result-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 2px;
+            font-size: 0.78rem;
+            color: #475569;
             font-weight: 700;
         }
         .result-value {
-            font-size: 1.45rem;
+            font-size: 1.15rem;
             font-weight: 700;
             color: var(--text-main);
         }
-        .result-value.highlight { color: #3182ce; }
-        .result-value.success { color: #38a169; }
-        .result-value.danger { color: #e53e3e; }
+        .result-value.highlight { color: #2563eb; }
+        .result-value.success { color: #16a34a; }
+        .result-value.danger { color: #dc2626; }
         
         .amortization-wrapper {
-            margin-top: 30px;
+            margin-top: 20px;
             grid-column: span 2;
             background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
+            border: 1px solid var(--excel-border);
+            border-radius: 6px;
             overflow: hidden;
         }
         .amortization-title {
-            background: #f8fafc;
-            padding: 12px 20px;
-            font-size: 0.9rem;
+            background: #f1f5f9;
+            padding: 8px 12px;
+            font-size: 0.8rem;
             font-weight: 700;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid var(--excel-border);
             color: var(--text-main);
         }
         .table-responsive {
             overflow-x: auto;
-            max-height: 380px;
+            max-height: 300px;
         }
         table.amort-table {
             width: 100%;
             border-collapse: collapse;
             text-align: left;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
         table.amort-table th {
-            background: #edf2f7;
-            padding: 10px 15px;
+            background: #f8fafc;
+            padding: 8px 12px;
             font-weight: 700;
             color: var(--text-main);
             position: sticky;
             top: 0;
             z-index: 10;
-            white-space: nowrap;
+            border-bottom: 1px solid var(--excel-border);
         }
         table.amort-table td {
-            padding: 10px 15px;
+            padding: 8px 12px;
             border-bottom: 1px solid #edf2f7;
-            color: #4a5568;
-            white-space: nowrap;
+            color: #334155;
         }
         table.amort-table tr:hover {
-            background-color: #f7fafc;
+            background-color: #f1f5f9;
         }
 
         .price-split-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            background: var(--card-bg);
+            gap: 15px;
         }
         .breakdown-box {
             background-color: #ffffff;
-            border: 1.5px dashed #e2e8f0;
-            border-radius: 12px;
-            padding: 15px;
+            border: 1px solid var(--excel-border);
+            border-radius: 4px;
+            padding: 10px;
         }
         .breakdown-row {
             display: flex;
             justify-content: space-between;
-            font-size: 0.88rem;
-            padding: 8px 0;
+            font-size: 0.8rem;
+            padding: 6px 0;
             border-bottom: 1px solid #f1f5f9;
         }
         .breakdown-row:last-child { border-bottom: none; }
         .breakdown-row span:last-child { font-weight: 700; color: var(--text-main);}
 
         .note-box {
-            margin-top: 15px;
-            background-color: #fffff0;
-            border: 1px solid #fefcbf;
-            color: #744210;
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 0.8rem;
+            margin-top: 10px;
+            background-color: #fffbeb;
+            border: 1px solid #fef08a;
+            color: #713f12;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
         }
 
         @keyframes fadeIn {
@@ -420,42 +439,27 @@
             to { opacity: 1; }
         }
         @keyframes slideUp {
-            from { transform: translateY(30px); opacity: 0; }
+            from { transform: translateY(15px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
 
-        @media (max-width: 868px) {
+        @media (max-width: 768px) {
             .dashboard-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-            .tool-card {
-                padding: 20px 15px;
-                border-radius: 14px;
-                gap: 10px;
-            }
-            .tool-card img {
-                width: 44px;
-                height: 44px;
-            }
-            .tool-card h3 {
-                font-size: 0.85rem;
+                gap: 8px;
             }
             .calculator-grid, .price-split-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
+                gap: 15px;
             }
             .amortization-wrapper {
                 grid-column: span 1;
             }
-            .section-title {
-                flex-direction: row;
-                align-items: center;
-                gap: 10px;
+            .excel-label {
+                flex: 0 0 50%;
             }
-            table.amort-table th, table.amort-table td {
-                padding: 8px 10px;
-                font-size: 0.78rem;
+            .excel-value-cell {
+                flex: 0 0 50%;
             }
         }
     </style>
@@ -464,7 +468,7 @@
 
     <div id="custom-splash-screen">
         <div class="splash-frame">
-            <img src="https://i.postimg.cc/bwxHrNZB/Real-Estate-Calculator-(3).gif" alt="Real Estate Core Engine Init">
+            <img src="https://i.postimg.cc/bwxHrNZB/Real-Estate-Calculator-(3).gif" alt="Engine Init">
         </div>
     </div>
 
@@ -474,7 +478,7 @@
                 <img src="https://cdn3d.iconscout.com/3d/premium/thumb/house-with-financial-calculator-3d-icon-png-download-14089504.png" alt="Logo">
             </div>
             <h1 class="app-name-title">Real Estate Calculator</h1>
-            <div class="version-tag">v1.63</div>
+            <div class="version-tag">v1.65</div>
         </div>
     </header>
 
@@ -483,32 +487,26 @@
         <div id="main-app-dashboard" class="dashboard-wrapper">
             <h2 class="dashboard-heading">Property Calculation Suite</h2>
             <div class="dashboard-grid">
-                
                 <div class="tool-card" onclick="launchTool('emi-calc')">
                     <img src="https://i.postimg.cc/x8GL9Jcv/image.png" alt="EMI">
                     <h3>EMI Calculator</h3>
                 </div>
-                
                 <div class="tool-card" onclick="launchTool('eligibility-calc')">
                     <img src="https://i.postimg.cc/LsZYHYWj/image.png" alt="Eligibility">
                     <h3>Loan Eligibility</h3>
                 </div>
-                
                 <div class="tool-card" onclick="launchTool('price-sheet')">
                     <img src="https://i.postimg.cc/02Byb5Dc/image.png" alt="Price">
                     <h3>Cost Sheet</h3>
                 </div>
-                
                 <div class="tool-card" onclick="launchTool('area-converter-sec')">
                     <img src="https://i.postimg.cc/Mpqdfxw1/image.png" alt="Converter">
                     <h3>Area Converter</h3>
                 </div>
-
                 <div class="tool-card" onclick="launchTool('roi-investment-sec')">
                     <img src="https://i.postimg.cc/fLmwnF2y/image.png" alt="ROI Analysis">
                     <h3>Return on Investment</h3>
                 </div>
-
             </div>
         </div>
 
@@ -521,29 +519,30 @@
                 <button class="back-dash-btn" onclick="exitToDashboard()">← Back</button>
             </div>
             <div class="calculator-grid">
-                <div class="calculator-inputs">
-                    <div class="input-group">
-                        <label for="emi-amount">Loan Amount</label>
-                        <div class="input-wrapper">
-                            <span class="input-prefix">₹</span>
-                            <input type="text" id="emi-amount" inputmode="decimal" placeholder="Enter loan amount" oninput="handleCurrencyInput(this, calculateEMI)">
+                <div class="excel-sheet-container">
+                    <div class="excel-row">
+                        <div class="excel-label">Loan Amount</div>
+                        <div class="excel-value-cell">
+                            <span class="excel-prefix">₹</span>
+                            <input type="text" id="emi-amount" inputmode="decimal" placeholder="0" oninput="handleCurrencyInput(this, calculateEMI)">
                         </div>
                     </div>
-                    <div class="input-group">
-                        <label for="emi-interest">Interest Rate (p.a.)</label>
-                        <div class="input-wrapper">
-                            <span class="input-prefix">%</span>
-                            <input type="number" step="any" id="emi-interest" inputmode="decimal" placeholder="Enter interest rate" oninput="calculateEMI()">
+                    <div class="excel-row">
+                        <div class="excel-label">Interest Rate (p.a.)</div>
+                        <div class="excel-value-cell">
+                            <span class="excel-prefix">%</span>
+                            <input type="number" step="any" id="emi-interest" inputmode="decimal" placeholder="0" oninput="calculateEMI()">
                         </div>
                     </div>
-                    <div class="input-group">
-                        <label for="emi-tenure">Tenure (Years)</label>
-                        <div class="input-wrapper">
-                            <span class="input-prefix">Yr</span>
-                            <input type="number" step="any" id="emi-tenure" inputmode="decimal" placeholder="Enter tenure in years" oninput="calculateEMI()">
+                    <div class="excel-row">
+                        <div class="excel-label">Tenure (Years)</div>
+                        <div class="excel-value-cell">
+                            <span class="excel-prefix">Yr</span>
+                            <input type="number" step="any" id="emi-tenure" inputmode="decimal" placeholder="0" oninput="calculateEMI()">
                         </div>
                     </div>
                 </div>
+                
                 <div class="results-panel">
                     <div class="result-item">
                         <div class="result-label">Monthly EMI Installment</div>
@@ -554,7 +553,7 @@
                         <div class="result-value" id="render-total-interest">₹ 0</div>
                     </div>
                     <div class="result-item">
-                        <div class="result-label">Total Amount (Principal + Interest)</div>
+                        <div class="result-label">Total Amount (P + I)</div>
                         <div class="result-value" id="render-total-amount">₹ 0</div>
                     </div>
                 </div>
@@ -566,15 +565,15 @@
                             <thead>
                                 <tr>
                                     <th>Year</th>
-                                    <th>Opening Balance</th>
+                                    <th>Opening Bal</th>
                                     <th>Interest Paid</th>
                                     <th>Principal Repaid</th>
-                                    <th>Closing Balance</th>
+                                    <th>Closing Bal</th>
                                 </tr>
                             </thead>
                             <tbody id="amortization-table-body">
                                 <tr>
-                                    <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 20px;">Provide valid loan parameters...</td>
+                                    <td colspan="5" style="text-align: center; color: #64748b; padding: 15px;">Provide valid parameters...</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -592,51 +591,52 @@
                 <button class="back-dash-btn" onclick="exitToDashboard()">← Back</button>
             </div>
             <div class="calculator-grid">
-                <div class="calculator-inputs">
-                    <div class="input-group">
-                        <label for="el-salary">Gross Monthly Income</label>
-                        <div class="input-wrapper">
-                            <span class="input-prefix">₹</span>
-                            <input type="text" id="el-salary" inputmode="decimal" placeholder="Enter income" oninput="handleCurrencyInput(this, calculateEligibility)">
+                <div class="excel-sheet-container">
+                    <div class="excel-row">
+                        <div class="excel-label">Gross Monthly Income</div>
+                        <div class="excel-value-cell">
+                            <span class="excel-prefix">₹</span>
+                            <input type="text" id="el-salary" inputmode="decimal" placeholder="0" oninput="handleCurrencyInput(this, calculateEligibility)">
                         </div>
                     </div>
-                    <div class="input-group">
-                        <label for="el-age">Age of Applicant</label>
-                        <div class="input-wrapper">
-                            <span class="input-prefix">Yo</span>
-                            <input type="number" step="any" id="el-age" inputmode="decimal" placeholder="Enter age" min="18" max="70" oninput="calculateEligibility()">
+                    <div class="excel-row">
+                        <div class="excel-label">Age of Applicant</div>
+                        <div class="excel-value-cell">
+                            <span class="excel-prefix">Yo</span>
+                            <input type="number" id="el-age" inputmode="decimal" placeholder="0" min="18" max="70" oninput="calculateEligibility()">
                         </div>
                     </div>
-                    <div class="input-group">
-                        <label for="el-obligations">Existing Monthly EMIs</label>
-                        <div class="input-wrapper">
-                            <span class="input-prefix">₹</span>
-                            <input type="text" id="el-obligations" inputmode="decimal" placeholder="Enter current EMIs" oninput="handleCurrencyInput(this, calculateEligibility)">
+                    <div class="excel-row">
+                        <div class="excel-label">Existing Monthly EMIs</div>
+                        <div class="excel-value-cell">
+                            <span class="excel-prefix">₹</span>
+                            <input type="text" id="el-obligations" inputmode="decimal" placeholder="0" oninput="handleCurrencyInput(this, calculateEligibility)">
                         </div>
                     </div>
-                    <div class="input-group">
-                        <label for="el-interest">Expected Interest Rate (p.a.)</label>
-                        <div class="input-wrapper">
-                            <span class="input-prefix">%</span>
-                            <input type="number" step="0.05" id="el-interest" inputmode="decimal" placeholder="Enter interest rate" oninput="calculateEligibility()">
+                    <div class="excel-row">
+                        <div class="excel-label">Expected Interest Rate</div>
+                        <div class="excel-value-cell">
+                            <span class="excel-prefix">%</span>
+                            <input type="number" step="0.05" id="el-interest" inputmode="decimal" placeholder="0" oninput="calculateEligibility()">
                         </div>
                     </div>
                 </div>
+                
                 <div class="results-panel eligibility-panel">
                     <div class="result-item">
-                        <div class="result-label">Maximum Tenure Allowed</div>
+                        <div class="result-label">Maximum Tenure</div>
                         <div class="result-value" id="render-el-tenure">0 Years</div>
                     </div>
                     <div class="result-item">
-                        <div class="result-label">Available FOIR Factors</div>
+                        <div class="result-label">FOIR Factor Applied</div>
                         <div class="result-value" id="render-el-foir">0%</div>
                     </div>
                     <div class="result-item">
-                        <div class="result-label">Max Affordable Monthly EMI</div>
+                        <div class="result-label">Max Affordable EMI</div>
                         <div class="result-value" id="render-el-emi">₹ 0</div>
                     </div>
                     <div class="result-item">
-                        <div class="result-label">Eligible Loan Amount Estimate</div>
+                        <div class="result-label">Eligible Loan Estimate</div>
                         <div class="result-value success" id="render-el-loan">₹ 0</div>
                     </div>
                 </div>
@@ -647,62 +647,64 @@
             <div class="section-title">
                 <div class="title-left-block">
                     <img src="https://i.postimg.cc/02Byb5Dc/image.png" alt="">
-                    <h2>Cost Sheet</h2>
+                    <h2>Cost Sheet Suite</h2>
                 </div>
                 <button class="back-dash-btn" onclick="exitToDashboard()">← Back</button>
             </div>
             
             <div class="price-split-grid">
-                <div class="calculator-inputs">
-                    <div class="input-group">
-                        <label for="ps-carpet">Carpet Area</label>
-                        <div class="input-wrapper">
-                            <span class="input-prefix">Sq</span>
-                            <input type="number" step="any" id="ps-carpet" inputmode="decimal" placeholder="Enter carpet area (sqft)" oninput="runPriceEngine('forward')">
+                <div>
+                    <div class="excel-sheet-container">
+                        <div class="excel-row">
+                            <div class="excel-label">Carpet Area (Sq.Ft.)</div>
+                            <div class="excel-value-cell">
+                                <span class="excel-prefix">Sq</span>
+                                <input type="number" step="any" id="ps-carpet" inputmode="decimal" placeholder="0" oninput="runPriceEngine('carpet-change')">
+                            </div>
                         </div>
-                    </div>
-                    <div class="input-group">
-                        <label for="ps-rate">Per Sq. Ft. Price</label>
-                        <div class="input-wrapper">
-                            <span class="input-prefix">₹</span>
-                            <input type="text" id="ps-rate" inputmode="decimal" placeholder="Enter rate per sqft" oninput="handleCurrencyInput(this, function(){ runPriceEngine('forward'); })">
+                        <div class="excel-row">
+                            <div class="excel-label">Per Sq. Ft. Price (PSF)</div>
+                            <div class="excel-value-cell">
+                                <span class="excel-prefix">₹</span>
+                                <input type="text" id="ps-rate" inputmode="decimal" placeholder="0" oninput="handleCurrencyInput(this, function(){ runPriceEngine('rate-change'); })">
+                            </div>
                         </div>
-                    </div>
-                    <div class="input-group">
-                        <label for="ps-agreement">Agreement Value</label>
-                        <div class="input-wrapper">
-                            <span class="input-prefix">₹</span>
-                            <input type="text" id="ps-agreement" inputmode="decimal" placeholder="Enter agreement value" oninput="handleCurrencyInput(this, function(){ runPriceEngine('agreement-change'); })">
+                        <div class="excel-row">
+                            <div class="excel-label">Agreement Value</div>
+                            <div class="excel-value-cell">
+                                <span class="excel-prefix">₹</span>
+                                <input type="text" id="ps-agreement" inputmode="decimal" placeholder="0" oninput="handleCurrencyInput(this, function(){ runPriceEngine('agreement-change'); })">
+                            </div>
                         </div>
-                    </div>
-                    <div class="input-group">
-                        <label>Car Parking Allowance</label>
-                        <div class="input-wrapper">
-                            <span class="input-prefix">₹</span>
-                            <input type="text" id="ps-parking" inputmode="decimal" value="10,00,000" oninput="handleCurrencyInput(this, function(){ runPriceEngine('forward'); })">
+                        <div class="excel-row">
+                            <div class="excel-label">Car Parking Allowance</div>
+                            <div class="excel-value-cell">
+                                <span class="excel-prefix">₹</span>
+                                <input type="text" id="ps-parking" inputmode="decimal" value="10,00,000" oninput="handleCurrencyInput(this, function(){ runPriceEngine('parking-change'); })">
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="toggle-group">
-                        <input type="checkbox" id="ps-parking-tax-toggle" onchange="runPriceEngine('toggle-change')">
-                        <label for="ps-parking-tax-toggle">Add Car Parking in Agreement Value</label>
-                    </div>
-
-                    <div class="input-group">
-                        <label for="ps-other-amt">Other Amount</label>
-                        <div class="input-wrapper">
-                            <span class="input-prefix">₹</span>
-                            <input type="text" id="ps-other-amt" inputmode="decimal" placeholder="Enter other amount" oninput="handleCurrencyInput(this, function(){ runPriceEngine('other-change'); })">
+                        <div class="excel-toggle-row">
+                            <input type="checkbox" id="ps-parking-tax-toggle" onchange="runPriceEngine('toggle-change')">
+                            <label for="ps-parking-tax-toggle">Add Car Parking in Agreement Value</label>
+                        </div>
+                        <div class="excel-row">
+                            <div class="excel-label">Other Amount (Direct Minus)</div>
+                            <div class="excel-value-cell">
+                                <span class="excel-prefix">₹</span>
+                                <input type="text" id="ps-other-amt" inputmode="decimal" placeholder="0" oninput="handleCurrencyInput(this, function(){ runPriceEngine('other-change'); })">
+                            </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="results-panel price-panel">
-                    <div class="input-group" style="margin-bottom:5px;">
-                        <label for="ps-allin" style="color:var(--text-main); font-weight:700;">ALL-INCLUSIVE ESTIMATED PRICE</label>
-                        <div class="input-wrapper">
-                            <span class="input-prefix" style="color:var(--brand-dark)">₹</span>
-                            <input type="text" id="ps-allin" inputmode="decimal" placeholder="Enter targeted all-in price" style="border-color:var(--brand-color); font-weight:700; color:var(--brand-dark); font-size:1.1rem" oninput="handleCurrencyInput(this, function(){ runPriceEngine('backward'); })">
+                    <div class="excel-sheet-container" style="border-color: var(--excel-focus);">
+                        <div class="excel-row" style="background: var(--brand-light);">
+                            <div class="excel-label" style="background: #e0e7ff; color: var(--excel-focus); font-weight:700;">ALL-INCLUSIVE PRICE</div>
+                            <div class="excel-value-cell">
+                                <span class="excel-prefix" style="color: var(--excel-focus)">₹</span>
+                                <input type="text" id="ps-allin" inputmode="decimal" placeholder="Target Price" style="font-weight:700; color:var(--excel-focus);" oninput="handleCurrencyInput(this, function(){ runPriceEngine('backward'); })">
+                            </div>
                         </div>
                     </div>
 
@@ -737,55 +739,55 @@
                 <button class="back-dash-btn" onclick="exitToDashboard()">← Back</button>
             </div>
             <div class="calculator-grid">
-                <div class="calculator-inputs">
-                    <div class="input-group">
-                        <label>Square Feet (Sq. Ft.)</label>
-                        <div class="input-wrapper">
-                            <span class="input-prefix">Ft²</span>
-                            <input type="number" step="any" id="conv-sqft" inputmode="decimal" placeholder="Enter Sq. Ft." oninput="convertAreaUnits('sqft')">
+                <div class="excel-sheet-container">
+                    <div class="excel-row">
+                        <div class="excel-label">Square Feet (Sq.Ft.)</div>
+                        <div class="excel-value-cell">
+                            <span class="excel-prefix">Ft²</span>
+                            <input type="number" step="any" id="conv-sqft" inputmode="decimal" placeholder="0" oninput="convertAreaUnits('sqft')">
                         </div>
                     </div>
-                    <div class="input-group">
-                        <label>Square Meters (Sq. M.)</label>
-                        <div class="input-wrapper">
-                            <span class="input-prefix">M²</span>
-                            <input type="number" step="any" id="conv-sqm" inputmode="decimal" placeholder="Enter Sq. M." oninput="convertAreaUnits('sqm')">
+                    <div class="excel-row">
+                        <div class="excel-label">Square Meters (Sq.M.)</div>
+                        <div class="excel-value-cell">
+                            <span class="excel-prefix">M²</span>
+                            <input type="number" step="any" id="conv-sqm" inputmode="decimal" placeholder="0" oninput="convertAreaUnits('sqm')">
                         </div>
                     </div>
-                    <div class="input-group">
-                        <label>Acres</label>
-                        <div class="input-wrapper">
-                            <span class="input-prefix">Ac</span>
-                            <input type="number" step="any" id="conv-acres" inputmode="decimal" placeholder="Enter Acres" oninput="convertAreaUnits('acres')">
+                    <div class="excel-row">
+                        <div class="excel-label">Acres</div>
+                        <div class="excel-value-cell">
+                            <span class="excel-prefix">Ac</span>
+                            <input type="number" step="any" id="conv-acres" inputmode="decimal" placeholder="0" oninput="convertAreaUnits('acres')">
                         </div>
                     </div>
-                    <div class="input-group">
-                        <label>Guntas (Guntha)</label>
-                        <div class="input-wrapper">
-                            <span class="input-prefix">Gt</span>
-                            <input type="number" step="any" id="conv-guntas" inputmode="decimal" placeholder="Enter Guntas" oninput="convertAreaUnits('guntas')">
+                    <div class="excel-row">
+                        <div class="excel-label">Guntas (Guntha)</div>
+                        <div class="excel-value-cell">
+                            <span class="excel-prefix">Gt</span>
+                            <input type="number" step="any" id="conv-guntas" inputmode="decimal" placeholder="0" oninput="convertAreaUnits('guntas')">
                         </div>
                     </div>
-                    <div class="input-group">
-                        <label>Bighas</label>
-                        <div class="input-wrapper">
-                            <span class="input-prefix">Bh</span>
-                            <input type="number" step="any" id="conv-bigha" inputmode="decimal" placeholder="Enter Bighas" oninput="convertAreaUnits('bigha')">
+                    <div class="excel-row">
+                        <div class="excel-label">Bighas</div>
+                        <div class="excel-value-cell">
+                            <span class="excel-prefix">Bh</span>
+                            <input type="number" step="any" id="conv-bigha" inputmode="decimal" placeholder="0" oninput="convertAreaUnits('bigha')">
                         </div>
                     </div>
-                    <div class="input-group">
-                        <label>Hectares</label>
-                        <div class="input-wrapper">
-                            <span class="input-prefix">Ha</span>
-                            <input type="number" step="any" id="conv-hectares" inputmode="decimal" placeholder="Enter Hectares" oninput="convertAreaUnits('hectares')">
+                    <div class="excel-row">
+                        <div class="excel-label">Hectares</div>
+                        <div class="excel-value-cell">
+                            <span class="excel-prefix">Ha</span>
+                            <input type="number" step="any" id="conv-hectares" inputmode="decimal" placeholder="0" oninput="convertAreaUnits('hectares')">
                         </div>
                     </div>
                 </div>
                 
                 <div class="results-panel converter-panel">
-                    <div class="result-item">
-                        <div class="result-label">Standard Conversion Constants</div>
-                        <div style="font-size: 0.88rem; color: var(--text-main); margin-top: 5px; line-height: 1.7;">
+                    <div class="result-item" style="flex-direction: column; align-items: flex-start;">
+                        <div class="result-label" style="margin-bottom: 5px;">Conversion Matrix Constants</div>
+                        <div style="font-size: 0.76rem; color: #334155; line-height: 1.6;">
                             • 1 Sq. M. = 10.7639 Sq. Ft.<br>
                             • 1 Guntha = 1,089 Sq. Ft.<br>
                             • 1 Acre = 43,560 Sq. Ft.<br>
@@ -801,31 +803,31 @@
             <div class="section-title">
                 <div class="title-left-block">
                     <img src="https://i.postimg.cc/fLmwnF2y/image.png" alt="">
-                    <h2>ROI Calculator</h2>
+                    <h2>ROI Yield Calculator</h2>
                 </div>
                 <button class="back-dash-btn" onclick="exitToDashboard()">← Back</button>
             </div>
             <div class="calculator-grid">
-                <div class="calculator-inputs">
-                    <div class="input-group">
-                        <label for="roi-prop-value">Property Value</label>
-                        <div class="input-wrapper">
-                            <span class="input-prefix">₹</span>
-                            <input type="text" id="roi-prop-value" inputmode="decimal" placeholder="Enter asset value" oninput="handleCurrencyInput(this, calculateROIEngine)">
+                <div class="excel-sheet-container">
+                    <div class="excel-row">
+                        <div class="excel-label">Property Value</div>
+                        <div class="excel-value-cell">
+                            <span class="excel-prefix">₹</span>
+                            <input type="text" id="roi-prop-value" inputmode="decimal" placeholder="0" oninput="handleCurrencyInput(this, calculateROIEngine)">
                         </div>
                     </div>
-                    <div class="input-group">
-                        <label for="roi-monthly-rent">Monthly Rental Income</label>
-                        <div class="input-wrapper">
-                            <span class="input-prefix">₹</span>
-                            <input type="text" id="roi-monthly-rent" inputmode="decimal" placeholder="Enter monthly rent" oninput="handleCurrencyInput(this, function(){ runRentalBilateralEngine('monthly'); })">
+                    <div class="excel-row">
+                        <div class="excel-label">Monthly Rental Income</div>
+                        <div class="excel-value-cell">
+                            <span class="excel-prefix">₹</span>
+                            <input type="text" id="roi-monthly-rent" inputmode="decimal" placeholder="0" oninput="handleCurrencyInput(this, function(){ runRentalBilateralEngine('monthly'); })">
                         </div>
                     </div>
-                    <div class="input-group">
-                        <label for="roi-annual-rent">Annual Rental Income</label>
-                        <div class="input-wrapper">
-                            <span class="input-prefix">₹</span>
-                            <input type="text" id="roi-annual-rent" inputmode="decimal" placeholder="Enter annual rent" oninput="handleCurrencyInput(this, function(){ runRentalBilateralEngine('annual'); })">
+                    <div class="excel-row">
+                        <div class="excel-label">Annual Rental Income</div>
+                        <div class="excel-value-cell">
+                            <span class="excel-prefix">₹</span>
+                            <input type="text" id="roi-annual-rent" inputmode="decimal" placeholder="0" oninput="handleCurrencyInput(this, function(){ runRentalBilateralEngine('annual'); })">
                         </div>
                     </div>
                 </div>
@@ -834,11 +836,8 @@
                         <div class="result-label">Gross Capital Return Yield Rate</div>
                         <div class="result-value danger" id="render-roi-percentage">0.00 %</div>
                     </div>
-                    <div class="result-item">
-                        <div class="result-label">Investment Efficiency Assessment</div>
-                        <div style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; margin-top:4px;">
-                            Yield metrics describe annual cash inflows divided against deployment values. Commercial parameters leverage 6-9%, residential stays within 2.5-4.5%.
-                        </div>
+                    <div class="note-box" style="margin-top:0;">
+                        Yield metrics calculate annual cash inflows against deployment value. Commercial yields leverage 6-9%, residential properties average 2.5-4.5%.
                     </div>
                 </div>
             </div>
@@ -847,16 +846,20 @@
     </div>
 
     <script>
+        // Structural Anchor variable to prevent continuous addition loop
+        let ORIGINAL_FLAT_COST = 0;
+
         window.addEventListener('DOMContentLoaded', () => {
-            const randomSplashDuration = Math.floor(Math.random() * (3000 - 2000 + 1)) + 2000;
+            // Random splash screen layout execution timer (1.0 sec to 1.5 sec)
+            const randomDelay = Math.floor(Math.random() * (1500 - 1000 + 1)) + 1000;
             setTimeout(() => {
                 const splash = document.getElementById('custom-splash-screen');
                 if (splash) {
                     splash.style.opacity = '0';
                     splash.style.visibility = 'hidden';
-                    setTimeout(() => { splash.remove(); }, 400);
+                    setTimeout(() => { splash.remove(); }, 300);
                 }
-            }, randomSplashDuration);
+            }, randomDelay);
         });
 
         document.addEventListener('wheel', function(e) { if (e.ctrlKey) e.preventDefault(); }, { passive: false });
@@ -974,7 +977,7 @@
                 document.getElementById('render-emi').innerText = "₹ 0";
                 document.getElementById('render-total-interest').innerText = "₹ 0";
                 document.getElementById('render-total-amount').innerText = "₹ 0";
-                tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 20px;">Provide valid loan parameters...</td></tr>`;
+                tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #64748b; padding: 15px;">Provide valid parameters...</td></tr>`;
                 return;
             }
 
@@ -997,12 +1000,13 @@
             for (let currentYear = 1; currentYear <= tenureYears; currentYear++) {
                 let cumulativeYearlyInterestPaid = 0;
                 let cumulativeYearlyPrincipalPaid = 0;
+                let openingBalForYear = currentOpeningBalance;
 
                 for (let month = 1; month <= 12; month++) {
                     let calculatedInterestComponent = currentOpeningBalance * monthlyInterestRate;
                     let calculatedPrincipalComponent = monthlyEmi - calculatedInterestComponent;
 
-                    if (currentOpeningBalance < calculatedPrincipalComponent || (currentYear === tenureYears && month === 12)) {
+                    if (currentOpeningBalance < calculatedPrincipalComponent) {
                         calculatedPrincipalComponent = currentOpeningBalance;
                         calculatedInterestComponent = Math.max(0, monthlyEmi - calculatedPrincipalComponent);
                     }
@@ -1013,11 +1017,8 @@
                     if(currentOpeningBalance <= 0) { currentOpeningBalance = 0; break; }
                 }
 
-                let currentClosingBalance = currentOpeningBalance;
-                let runningOpeningBalanceDisplay = currentClosingBalance + cumulativeYearlyPrincipalPaid;
-
-                tableHTMLBuffer += `<tr><td><strong>Year ${currentYear}</strong></td><td>₹ ${formatIndianCurrency(runningOpeningBalanceDisplay)}</td><td>₹ ${formatIndianCurrency(cumulativeYearlyInterestPaid)}</td><td>₹ ${formatIndianCurrency(cumulativeYearlyPrincipalPaid)}</td><td><strong>₹ ${formatIndianCurrency(currentClosingBalance)}</strong></td></tr>`;
-                if(currentClosingBalance <= 0) break;
+                tableHTMLBuffer += `<tr><td><strong>Year ${currentYear}</strong></td><td>₹ ${formatIndianCurrency(openingBalForYear)}</td><td>₹ ${formatIndianCurrency(cumulativeYearlyInterestPaid)}</td><td>₹ ${formatIndianCurrency(cumulativeYearlyPrincipalPaid)}</td><td><strong>₹ ${formatIndianCurrency(currentOpeningBalance)}</strong></td></tr>`;
+                if(currentOpeningBalance <= 0) break;
             }
             tableBody.innerHTML = tableHTMLBuffer;
         }
@@ -1053,7 +1054,7 @@
             document.getElementById('render-el-loan').innerText = "₹ " + formatIndianCurrency(eligibleLoan);
         }
 
-        // UPGRADED PRODUCTION COST ENGINE v1.63 (MUTUAL SWING RE-CALIBRATED)
+        // PERFECTED SUITE ENGINE WITH ABSOLUTE STRUCTURAL RESET v1.65
         function runPriceEngine(direction) {
             let carpet = parseFloat(document.getElementById('ps-carpet').value) || 0;
             let parking = getPureNumber(document.getElementById('ps-parking').value);
@@ -1070,36 +1071,49 @@
                 return;
             }
 
-            if (direction === 'forward') {
+            if (direction === 'rate-change' || direction === 'carpet-change') {
                 let rate = getPureNumber(document.getElementById('ps-rate').value);
-                let baseFlatCost = carpet * rate;
-                
-                // FIXED MUTUAL REDUCTION: Other Amount gets directly minus from Agreement Value
-                let derivedAgreement = isParkingInAgreement ? (baseFlatCost + parking - otherAmount) : (baseFlatCost - otherAmount);
-                if (derivedAgreement < 0) derivedAgreement = 0;
+                ORIGINAL_FLAT_COST = carpet * rate; // Lock initial property value
 
+                let derivedAgreement = ORIGINAL_FLAT_COST - otherAmount + (isParkingInAgreement ? parking : 0);
+                if (derivedAgreement < 0) derivedAgreement = 0;
+                
                 document.getElementById('ps-agreement').value = derivedAgreement > 0 ? formatIndianCurrency(derivedAgreement) : "";
-                executeCalculations(derivedAgreement, otherCharges, registration, parking, otherAmount, isParkingInAgreement);
+                
+                // Recalculate true visible PSF based on what's active inside the Agreement Box
+                let visibleRate = carpet > 0 ? (derivedAgreement / carpet) : 0;
+                document.getElementById('ps-rate').value = visibleRate > 0 ? formatIndianCurrency(visibleRate) : "";
+
+                executeCalculations(derivedAgreement, otherCharges, registration, parking, isParkingInAgreement);
             } 
-            else if (direction === 'other-change') {
-                // If user modifies Other Amount directly, re-run forward logic to calculate correct agreement subtraction
-                runPriceEngine('forward');
-            }
+            
             else if (direction === 'agreement-change') {
                 let displayAgreementValue = getPureNumber(document.getElementById('ps-agreement').value);
                 
-                // Back-calculate the base flat cost considering layout switches
-                let baseFlatCost = isParkingInAgreement ? (displayAgreementValue - parking + otherAmount) : (displayAgreementValue + otherAmount);
-                if (baseFlatCost < 0) baseFlatCost = 0;
+                // Track back to original structural anchor value
+                ORIGINAL_FLAT_COST = displayAgreementValue + otherAmount - (isParkingInAgreement ? parking : 0);
+                if (ORIGINAL_FLAT_COST < 0) ORIGINAL_FLAT_COST = 0;
                 
-                let rate = carpet > 0 ? (baseFlatCost / carpet) : 0;
-                document.getElementById('ps-rate').value = rate > 0 ? formatIndianCurrency(rate) : "";
+                let visibleRate = carpet > 0 ? (displayAgreementValue / carpet) : 0;
+                document.getElementById('ps-rate').value = visibleRate > 0 ? formatIndianCurrency(visibleRate) : "";
                 
-                executeCalculations(displayAgreementValue, otherCharges, registration, parking, otherAmount, isParkingInAgreement);
+                executeCalculations(displayAgreementValue, otherCharges, registration, parking, isParkingInAgreement);
             } 
-            else if (direction === 'toggle-change') {
-                runPriceEngine('forward');
+            
+            else if (direction === 'toggle-change' || direction === 'parking-change' || direction === 'other-change') {
+                // Compute pure clean state directly from the locked structural anchor point 
+                let derivedAgreement = ORIGINAL_FLAT_COST - otherAmount + (isParkingInAgreement ? parking : 0);
+                if (derivedAgreement < 0) derivedAgreement = 0;
+                
+                document.getElementById('ps-agreement').value = derivedAgreement > 0 ? formatIndianCurrency(derivedAgreement) : "";
+                
+                // Re-sync structural PSF without creating continuous multiplication drops
+                let visibleRate = carpet > 0 ? (derivedAgreement / carpet) : 0;
+                document.getElementById('ps-rate').value = visibleRate > 0 ? formatIndianCurrency(visibleRate) : "";
+                
+                executeCalculations(derivedAgreement, otherCharges, registration, parking, isParkingInAgreement);
             }
+            
             else if (direction === 'backward') {
                 let targetAllIn = getPureNumber(document.getElementById('ps-allin').value);
                 if (targetAllIn === 0) {
@@ -1112,43 +1126,35 @@
                 }
                 
                 let displayAgreementValue = 0;
-
                 if (isParkingInAgreement) {
-                    let totalTaxablePool = targetAllIn - registration - otherCharges - otherAmount;
+                    let totalTaxablePool = targetAllIn - registration - otherCharges;
                     displayAgreementValue = totalTaxablePool > 0 ? (totalTaxablePool / 1.11) : 0;
-                    
-                    let baseFlatCost = displayAgreementValue - parking + otherAmount;
-                    if (baseFlatCost < 0) baseFlatCost = 0;
-                    let derivedRate = carpet > 0 ? (baseFlatCost / carpet) : 0;
-                    
-                    document.getElementById('ps-agreement').value = displayAgreementValue > 0 ? formatIndianCurrency(displayAgreementValue) : "";
-                    document.getElementById('ps-rate').value = derivedRate > 0 ? formatIndianCurrency(derivedRate) : "";
                 } else {
-                    let totalTaxablePool = targetAllIn - registration - otherCharges - parking - otherAmount;
+                    let totalTaxablePool = targetAllIn - registration - otherCharges - parking;
                     displayAgreementValue = totalTaxablePool > 0 ? (totalTaxablePool / 1.11) : 0;
-                    
-                    let baseFlatCost = displayAgreementValue + otherAmount;
-                    let derivedRate = carpet > 0 ? (baseFlatCost / carpet) : 0;
-                    
-                    document.getElementById('ps-agreement').value = displayAgreementValue > 0 ? formatIndianCurrency(displayAgreementValue) : "";
-                    document.getElementById('ps-rate').value = derivedRate > 0 ? formatIndianCurrency(derivedRate) : "";
                 }
+
+                ORIGINAL_FLAT_COST = displayAgreementValue + otherAmount - (isParkingInAgreement ? parking : 0);
+                if (ORIGINAL_FLAT_COST < 0) ORIGINAL_FLAT_COST = 0;
+
+                let visibleRate = carpet > 0 ? (displayAgreementValue / carpet) : 0;
+                
+                document.getElementById('ps-agreement').value = displayAgreementValue > 0 ? formatIndianCurrency(displayAgreementValue) : "";
+                document.getElementById('ps-rate').value = visibleRate > 0 ? formatIndianCurrency(visibleRate) : "";
 
                 let stampDuty = displayAgreementValue * 0.06;
                 let gst = displayAgreementValue * 0.05;
 
-                document.getElementById('lbl-stamp').innerText = "₹ " + formatIndianCurrency(stampDuty > 0 ? stampDuty : 0);
-                document.getElementById('lbl-gst').innerText = "₹ " + formatIndianCurrency(gst > 0 ? gst : 0);
+                document.getElementById('lbl-stamp').innerText = "₹ " + formatIndianCurrency(stampDuty);
+                document.getElementById('lbl-gst').innerText = "₹ " + formatIndianCurrency(gst);
                 document.getElementById('lbl-other').innerText = "₹ " + formatIndianCurrency(otherCharges);
             }
         }
 
-        function executeCalculations(taxableAgreementValue, other, reg, park, otherAmt, isParkingInAgreement) {
+        function executeCalculations(taxableAgreementValue, other, reg, park, isParkingInAgreement) {
             let stampDuty = taxableAgreementValue * 0.06;
             let gst = taxableAgreementValue * 0.05;
-            
-            // Unchecked parking bypasses tax multiplier entirely and goes straight to All-In pool
-            let totalAllIn = taxableAgreementValue + stampDuty + gst + reg + other + otherAmt + (isParkingInAgreement ? 0 : park);
+            let totalAllIn = taxableAgreementValue + stampDuty + gst + reg + other + (isParkingInAgreement ? 0 : park);
 
             document.getElementById('lbl-stamp').innerText = "₹ " + formatIndianCurrency(stampDuty);
             document.getElementById('lbl-gst').innerText = "₹ " + formatIndianCurrency(gst);
